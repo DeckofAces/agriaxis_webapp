@@ -31,6 +31,7 @@ import ForgotPassword from './routes/auth/ForgotPassword.tsx'
 import OtpVerification from './routes/auth/OtpVerification.tsx'
 import ResetPassword from './routes/auth/ResetPassword.tsx'
 import Signup from './routes/auth/Signup.tsx'
+import Organisation from './routes/auth/Organisation.tsx'
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -102,6 +103,12 @@ const signupRoute = createRoute({
   component: Signup
 })
 
+const organisationRoute = createRoute({
+  getParentRoute: () => authRoute,
+  path: 'organisation',
+  component: Organisation
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   authRoute,
@@ -113,6 +120,7 @@ const routeTree = rootRoute.addChildren([
   otpVerificationRoute,
   resetPasswordRoute,
   signupRoute,
+  organisationRoute,
   FormSimpleDemo(rootRoute),
   FormAddressDemo(rootRoute),
   TableDemo(rootRoute),
