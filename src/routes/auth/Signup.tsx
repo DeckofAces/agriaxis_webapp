@@ -4,6 +4,7 @@ import { Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import facebookIcon from '/assets/icons/facebook.svg';
 import googleIcon from '/assets/icons/google.svg';
+import { Link } from '@tanstack/react-router'
 
 type LoginType = 'phone number' | 'email';
 
@@ -178,7 +179,9 @@ export default function Signup() {
         </>
       </section>
       <div>
-        <Button variant="primary">Sign up</Button>
+        <Link to="/auth/otp-verification">
+          <Button variant="primary">Sign up</Button>
+        </Link>
         <div className="w-fit mx-auto text-center mt-6">
           <p className="text-sm text-[#434449] mb-4">Or continue with</p>
           <div className="flex items-center gap-6 w-fit mx-auto">
@@ -187,7 +190,7 @@ export default function Signup() {
           </div>
         </div>
       </div>
-      <p className="w-fit mx-auto">Already have an account? <span className="ml-3 text-[#0A814A] cursor-pointer">Sign in</span></p>
+      <p className="w-fit mx-auto">Already have an account? <Link to="/auth/signin"><span className="ml-3 text-[#0A814A] cursor-pointer">Sign in</span></Link></p>
     </div>
   )
 } 

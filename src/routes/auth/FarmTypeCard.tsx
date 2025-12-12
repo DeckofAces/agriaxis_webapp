@@ -1,5 +1,6 @@
 import { FarmTypeCheckbox } from "@/components/auth/FarmTypeCheckbox";
 import { Button } from "@/components/Button";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 interface FarmerType {
@@ -57,7 +58,9 @@ export default function FarmTypeCard() {
           />
         ))}
       </section>
-      <Button variant="primary">Continue</Button>
+      <Link to="/auth/signup" className="block">
+        <Button variant="primary">Continue</Button>
+      </Link>
     </div>
   );
 }

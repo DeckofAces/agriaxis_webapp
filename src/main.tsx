@@ -32,13 +32,20 @@ import OtpVerification from './routes/auth/OtpVerification.tsx'
 import ResetPassword from './routes/auth/ResetPassword.tsx'
 import Signup from './routes/auth/Signup.tsx'
 import Organisation from './routes/auth/Organisation.tsx'
+import Splash from './routes/Splash.tsx'
+import DashboardRoot from './routes/dashboard/dashboard-root.tsx'
+import DashboardIndex from './routes/dashboard/index.tsx'
+import soilTesting from './routes/dashboard/soil-testing.tsx'
+import cropInformation from './routes/dashboard/crop-information.tsx'
+import cropMonitoring from './routes/dashboard/crop-monitoring.tsx'
+import CreatePassword from './routes/auth/CreatePassword.tsx'
 
 const rootRoute = createRootRoute({
   component: () => (
     <>
       {/* <Header /> */}
       <Outlet />
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </>
   ),
 })
@@ -47,6 +54,12 @@ const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
   component: App,
+})
+
+const splashRoute = createRoute({
+  getParentRoute: () => indexRoute,
+  path: '/splash',
+  component: Splash,
 })
 
 const authRoute = createRoute({
@@ -79,6 +92,12 @@ const signinRoute = createRoute({
   component: Signin
 })
 
+const createPasswordRoute = createRoute({
+  getParentRoute: () => authRoute,
+  path: 'create-password',
+  component: CreatePassword
+})
+
 const forgotPasswordRoute = createRoute({
   getParentRoute: () => authRoute,
   path: 'forgot-password',
@@ -109,18 +128,55 @@ const organisationRoute = createRoute({
   component: Organisation
 })
 
+const dashboardRoute = createRoute({
+  getParentRoute: () => indexRoute,
+  path: 'dashboard',
+  component: DashboardRoot
+})
+
+const dashboardIndexRoute = createRoute({
+  getParentRoute: () => dashboardRoute,
+  path: 'dashboard',
+  component: DashboardIndex
+})
+
+const soilTestingRoute = createRoute({
+  getParentRoute: () => dashboardRoute,
+  path: 'soil-testing',
+  component: soilTesting
+})
+
+const cropInformationRoute = createRoute({
+  getParentRoute: () => dashboardRoute,
+  path: 'crop-information',
+  component: cropInformation
+})
+
+const cropMonitoringRoute = createRoute({
+  getParentRoute: () => dashboardRoute,
+  path: 'crop-monitoring',
+  component: cropMonitoring
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
+  splashRoute,
   authRoute,
   getStartedRoute,
   selectCountryRoute,
   farmTypeRoute,
   signinRoute,
+  createPasswordRoute,
   forgotPasswordRoute,
   otpVerificationRoute,
   resetPasswordRoute,
   signupRoute,
   organisationRoute,
+  dashboardRoute,
+  dashboardIndexRoute,
+  soilTestingRoute,
+  cropInformationRoute,
+  cropMonitoringRoute,
   FormSimpleDemo(rootRoute),
   FormAddressDemo(rootRoute),
   TableDemo(rootRoute),

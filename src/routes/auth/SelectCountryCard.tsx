@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/popover";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "@tanstack/react-router";
 
 const countries = [
   {
@@ -121,7 +122,9 @@ export default function SelectCountryCard() {
         </PopoverContent>
       </Popover>
       <div>
-        <Button variant="primary">Continue</Button>
+        <Link to="/auth/farm-type" className="block">
+          <Button variant="primary">Continue</Button>
+        </Link>
       </div>
     </div>
   );

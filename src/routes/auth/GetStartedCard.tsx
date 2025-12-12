@@ -1,4 +1,5 @@
 import { Button } from "@/components/Button";
+import { Link } from "@tanstack/react-router";
 
 export default function GetStartedCard() {
   return (
@@ -11,9 +12,13 @@ export default function GetStartedCard() {
           Create an account or Login to continue with Farm Intelligence
         </h6>
       </header>
-      <section className="mb-2 space-y-4">
-        <Button variant="primary">Create an Account</Button>
-        <Button variant="secondary">Login</Button>
+      <section className="mb-2.5 space-y-4">
+        <Link to="/auth/select-country" className="block">
+          <Button variant="primary">Create an Account</Button>
+        </Link>
+        <Link to="/auth/signin" className="block">
+          <Button variant="secondary">Login</Button>
+        </Link>
       </section>
       <p className="mx-auto w-fit text-sm text-[#423C59]">
         Continuing means you agree with{" "}

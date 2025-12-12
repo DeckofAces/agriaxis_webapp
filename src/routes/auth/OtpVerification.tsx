@@ -1,6 +1,7 @@
 import CountdownTimer from "@/components/auth/CountdownTimer";
 import OtpInput from "@/components/auth/OTPInput";
 import { Button } from "@/components/Button";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 type LoginType = 'phone number' | 'email';
@@ -29,7 +30,9 @@ export default function OtpVerification() {
           Enter code in: <CountdownTimer />
         </p>
       </section>
-      <Button variant="primary">Continue</Button>
+      <Link to="/auth/create-password" className="block">
+        <Button variant="primary">Continue</Button>
+      </Link>
     </div>
   );
 }
