@@ -14,8 +14,8 @@ const navItems: NavItemType[] = [
   { name: 'Soil Testing', icon: Pencil, href: '/dashboard/soil-testing', isActive: false },
   { name: 'Crop Information', icon: Leaf, href: '/dashboard/crop-information', isActive: false },
   { name: 'Crop Monitoring', icon: Settings, href: '/dashboard/crop-monitoring', isActive: false },
-  { name: 'Market place', icon: ShoppingCart, href: '/dashboard/marketplace', isActive: false },
-  { name: 'Roles & permission', icon: UserCog, href: '/dashboard/roles-permissions', isActive: false },
+  { name: 'Market place', icon: ShoppingCart, href: '/dashboard', isActive: false },
+  { name: 'Roles & permission', icon: UserCog, href: '/dashboard/roles', isActive: false },
   { name: 'Users', icon: Users, href: '/dashboard/users', isActive: false },
 ];
 

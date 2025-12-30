@@ -1,7 +1,7 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 
-interface FarmTypeCheckboxProps {
+interface PaymentMethodCheckboxProps {
   title: string;
   subtitle: string;
   imageSrc?: string;
@@ -9,7 +9,7 @@ interface FarmTypeCheckboxProps {
   onChange: (checked: boolean) => void;
 }
 
-export const FarmTypeCheckbox: React.FC<FarmTypeCheckboxProps> = ({
+export const PaymentMethodCheckbox: React.FC<PaymentMethodCheckboxProps> = ({
   title,
   subtitle,
   imageSrc,

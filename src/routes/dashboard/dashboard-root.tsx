@@ -8,7 +8,7 @@ export default function DashboardRoot() {
       <div className="w-64 fixed top-4 left-4 h-[calc(100%-2rem)]">
         <Sidebar />
       </div>
-      <section className="w-[calc(100vw-19rem)] ml-auto">
+      <section className="w-[calc(100vw-20rem)] ml-auto">
         <div className="mb-1">
           <DashboardHeader />
         </div>

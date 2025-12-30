@@ -1,67 +1,128 @@
 import { Button } from "@/components/Button";
 import StatCard from "@/components/dashboard/StatCard";
-import farmIcon from '/assets/icons/farm.svg'
-import soilIcon from '/assets/icons/soil.svg'
-import cropIcon from '/assets/icons/crop.svg'
-import monitoringIcon from '/assets/icons/monitoring.svg'
-import ServiceCard from "@/components/dashboard/ServiceCard";
+import farmIcon from "/assets/icons/farm.svg";
+import FarmHealthCardWrapper from "@/components/dashboard/FarmHealthCard";
+import { FarmStatusCard } from "@/components/dashboard/FarmStatusCard";
+import { generateFarmStatus } from "@/data/farm_status.data";
+import { AddNewFarmSheet } from "@/components/dashboard/AddNewFarmSheet";
+import { useState } from "react";
+import { FarmsListContainer } from "@/components/dashboard/FarmsListContainer";
+import { FarmDetailsContainer } from "@/components/dashboard/FarmDetailsContainer";
+import type { Farm } from "@/models/farm.model";
+
+const farmStatus = generateFarmStatus();
+
+type DASHBOARD_VIEW = "overview" | "farms" | "farm-details";
 
 export default function DashboardIndex() {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [currentView, setCurrentView] = useState<DASHBOARD_VIEW>("overview");
+  const [selectedFarm, setSelectedFarm] = useState<Farm | null>(null);
+
+  const handleSelectFarm = (farm: Farm) => {
+    setSelectedFarm(farm);
+    setCurrentView("farm-details");
+  };
+
   return (
-    <section className="bg-white p-6 pb-9 rounded-[1.25rem]">
-      <section className="mb-6">
-        <header className="flex items-center justify-between mb-3 w-full">
-          <h1 className="text-lg sm:text-xl font-semibold font-neue text-[#939397]">
-            Overview
-          </h1>
-          <div className="w-41.5">
-            <Button variant="primary">
-              Add a new farm
-            </Button>
-          </div>
-        </header>
-        <div className="flex items-center gap-3">
-          <StatCard
-            icon={<div className="size-9.5 rounded-[0.375rem] grid place-items-center bg-[#E7F2ED] border border-[#0A814A]"><img src={farmIcon} width={17.5} height={15.64} /></div>}
-            title="No. of farms"
-            value="12"
-          />
-          <StatCard
-            icon={<div className="size-9.5 rounded-[0.375rem] grid place-items-center bg-[#E7F2ED] border border-[#0A814A]"><img src={farmIcon} width={17.5} height={15.64} /></div>}
-            title="No. of users"
-            value="34"
-          />
-          <StatCard
-            icon={<div className="size-9.5 rounded-[0.375rem] grid place-items-center bg-[#E7F2ED] border border-[#0A814A]"><img src={farmIcon} width={17.5} height={15.64} /></div>}
-            title="Crop monitoring"
-            value="12"
-          />
-        </div>
-      </section>
-      <section>
-        <header className="mb-4">
-          <h1 className="text-lg sm:text-xl font-semibold font-neue text-[#939397]">
-            Services
-          </h1>
-        </header>
-        <div className="flex flex-col gap-2 w-full">
-          <ServiceCard
-            icon={<div className="size-9.5 rounded-[0.375rem] grid place-items-center bg-[#E7F2ED] border border-[#0A814A]"><img src={soilIcon} width={20} height={20} /></div>}
-            title="Soil testing"
-            value="Click here to get your soil test result"
-          />
-          <ServiceCard
-            icon={<div className="size-9.5 rounded-[0.375rem] grid place-items-center bg-[#E7F2ED] border border-[#0A814A]"><img src={cropIcon} width={20} height={20} /></div>}
-            title="Crop information"
-            value="Get your crop information here"
-          />
-          <ServiceCard
-            icon={<div className="size-9.5 rounded-[0.375rem] grid place-items-center bg-[#E7F2ED] border border-[#0A814A]"><img src={monitoringIcon} width={20} height={20} /></div>}
-            title="Crop monitoring"
-            value="Monitor your crops health here"
-          />
-        </div>
-      </section>
-    </section>
-  )
+    <>
+      {currentView === "overview" && (
+        <main className="rounded-[1.25rem] bg-white p-6 pb-9">
+          <section className="mb-6">
+            <header className="mb-3 flex w-full items-center justify-between">
+              <h1 className="font-neue text-lg font-semibold text-[#939397] sm:text-xl">
+                Overview
+              </h1>
+              <div className="w-41.5">
+                <Button onClick={() => setIsFormOpen(true)} variant="primary">
+                  Add a new farm
+                </Button>
+              </div>
+            </header>
+            <div className="flex items-center gap-3">
+              <StatCard
+                icon={
+                  <div className="grid size-9.5 place-items-center rounded-[0.375rem] border border-[#0A814A] bg-[#E7F2ED]">
+                    <img src={farmIcon} width={17.5} height={15.64} />
+                  </div>
+                }
+                title="No. of farms"
+                value="12"
+              />
+              <StatCard
+                icon={
+                  <div className="grid size-9.5 place-items-center rounded-[0.375rem] border border-[#0A814A] bg-[#E7F2ED]">
+                    <img src={farmIcon} width={17.5} height={15.64} />
+                  </div>
+                }
+                title="No. of users"
+                value="34"
+              />
+              <StatCard
+                icon={
+                  <div className="grid size-9.5 place-items-center rounded-[0.375rem] border border-[#0A814A] bg-[#E7F2ED]">
+                    <img src={farmIcon} width={17.5} height={15.64} />
+                  </div>
+                }
+                title="Crop monitoring"
+                value="12"
+              />
+            </div>
+          </section>
+          <section className="mb-6">
+            <header className="mb-4 flex items-center justify-between">
+              <h1 className="font-neue text-lg font-semibold text-[#939397] sm:text-xl">
+                Farm overview
+              </h1>
+              <button
+                onClick={() => setCurrentView("farms")}
+                className="font-medium text-[#0A814A] underline hover:opacity-80"
+              >
+                See all farms
+              </button>
+            </header>
+            <div className="w-full">
+              <FarmHealthCardWrapper />
+            </div>
+          </section>
+          <section>
+            <header className="mb-4">
+              <h1 className="font-neue text-lg font-semibold text-[#939397] sm:text-xl">
+                Individual farm status
+              </h1>
+            </header>
+            <div className="grid w-full grid-cols-2 gap-4">
+              {farmStatus.map((entry) => (
+                <FarmStatusCard
+                  key={entry.id}
+                  title={entry.title}
+                  status={entry.status}
+                  stats={entry.stats}
+                />
+              ))}
+            </div>
+          </section>
+        </main>
+      )}
+      {currentView === "farms" && (
+        <FarmsListContainer
+          onClose={() => setCurrentView("overview")}
+          onAddNewFarm={() => setIsFormOpen(true)}
+          selectFarm={handleSelectFarm}
+        />
+      )}
+      {currentView === "farm-details" && selectedFarm && (
+        <FarmDetailsContainer
+          farm={selectedFarm}
+          onClose={() => setCurrentView("farms")}
+        />
+      )}
+      {isFormOpen && (
+        <AddNewFarmSheet
+          isOpen={isFormOpen}
+          onClose={() => setIsFormOpen(false)}
+        />
+      )}
+    </>
+  );
 }

@@ -39,6 +39,8 @@ import soilTesting from './routes/dashboard/soil-testing.tsx'
 import cropInformation from './routes/dashboard/crop-information.tsx'
 import cropMonitoring from './routes/dashboard/crop-monitoring.tsx'
 import CreatePassword from './routes/auth/CreatePassword.tsx'
+import roles from './routes/dashboard/roles.tsx'
+import users from './routes/dashboard/users.tsx'
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -158,6 +160,18 @@ const cropMonitoringRoute = createRoute({
   component: cropMonitoring
 })
 
+const rolesRoute = createRoute({
+  getParentRoute: () => dashboardRoute,
+  path: 'roles',
+  component: roles
+})
+
+const usersRoute = createRoute({
+  getParentRoute: () => dashboardRoute,
+  path: 'users',
+  component: users
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   splashRoute,
@@ -177,6 +191,8 @@ const routeTree = rootRoute.addChildren([
   soilTestingRoute,
   cropInformationRoute,
   cropMonitoringRoute,
+  rolesRoute,
+  usersRoute,
   FormSimpleDemo(rootRoute),
   FormAddressDemo(rootRoute),
   TableDemo(rootRoute),

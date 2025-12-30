@@ -7,7 +7,7 @@ interface FarmerType {
   id: string;
   title: string;
   subtitle: string;
-  imageSrc: string;
+  imageSrc?: string;
 }
 
 const farmerTypes: FarmerType[] = [
@@ -23,11 +23,26 @@ const farmerTypes: FarmerType[] = [
     subtitle: 'I manage between 1-9 hectare farmland',
     imageSrc: '/assets/images/medium-scale-farmer.png',
   },
+  // {
+  //   id: 'small',
+  //   title: 'Small scale Farmer',
+  //   subtitle: 'I manage farmlands below 1 hectare',
+  //   imageSrc: '/assets/images/small-scale-farmer.png',
+  // },
   {
-    id: 'small',
-    title: 'Small scale Farmer',
-    subtitle: 'I manage farmlands below 1 hectare',
-    imageSrc: '/assets/images/small-scale-farmer.png',
+    id: 'finance',
+    title: 'Financial Institutions',
+    subtitle: 'I manage a financial institution',
+  },
+  {
+    id: 'project',
+    title: 'Project Sponsors',
+    subtitle: 'I sponsor various projects',
+  },
+  {
+    id: 'others',
+    title: 'Others',
+    subtitle: 'My category is unlisted',
   },
 ];
 
