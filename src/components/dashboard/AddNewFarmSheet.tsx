@@ -21,7 +21,7 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
       onClick={onClose}
     >
       <section
-        className="z-50 ml-auto h-full w-[calc(100vw-19rem)] rounded-[1.25rem] bg-white p-8"
+        className="z-50 ml-auto h-full w-full lg:w-[calc(100vw-19rem)] rounded-[1.25rem] bg-white p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <header className="mb-8 flex items-center gap-3.5">
