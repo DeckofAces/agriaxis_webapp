@@ -166,7 +166,7 @@ const NavItem: React.FC<NavItemType> = ({ label, icon, path, isDisabled }) => {
 
 const Sidebar: React.FC = () => {
   return (
-    <div className="flex h-full w-64 flex-col rounded-[1.25rem] bg-[#1E8838] p-4">
+    <div className="flex h-full w-full flex-col rounded-[1.25rem] bg-[#1E8838] p-4">
       <div className="mb-8">
         <div className="flex items-center space-x-3">
           <img
