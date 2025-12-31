@@ -96,9 +96,9 @@ export const AddRoleSheet: React.FC<AddRoleSheetProps> = ({
           </button>
           <div className="flex flex-col gap-2">
             <h5 className="font-neue text-xl font-bold text-[#130B30]">
-              Add new user
+              Add new role
             </h5>
-            <h6 className="text-[#423C59]">Fill in the user details</h6>
+            <h6 className="text-[#423C59]">Fill in the role details and select appropriate permission</h6>
           </div>
         </header>
 

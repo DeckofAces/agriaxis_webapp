@@ -6,7 +6,8 @@ import { useState } from "react";
 const farm_size_options: SelectOption[] = [
   { label: "Acre", value: "acre" },
   { label: "Hectare", value: "hectare" },
-]
+];
+
 
 const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
   onClose,
@@ -14,6 +15,7 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
 }) => {
   if (!isOpen) return null;
   const [farmSize, setFarmSize] = useState<string | null>(null);
+  const [cropType, setCropType] = useState<string[]>([]);
 
   return (
     <section
@@ -21,7 +23,7 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
       onClick={onClose}
     >
       <section
-        className="z-50 ml-auto h-full w-full lg:w-[calc(100vw-19rem)] rounded-[1.25rem] bg-white p-8 overflow-y-auto"
+        className="z-50 ml-auto h-full w-full overflow-y-auto rounded-[1.25rem] bg-white p-8 lg:w-[calc(100vw-19rem)]"
         onClick={(e) => e.stopPropagation()}
       >
         <header className="mb-8 flex items-center gap-3.5">
@@ -35,7 +37,7 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
             Add new farm details
           </h5>
         </header>
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <section className="grid grid-cols-1 gap-10 md:grid-cols-2">
           <section className="space-y-6">
             <header>
               <h6 className="text-lg font-semibold text-[#939397]">Details</h6>
@@ -73,21 +75,16 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
                   />
                 </div>
               </div>
-              <div>
-                <label
-                  htmlFor="farm_size_unit"
-                  className="mb-1.5 text-sm text-[#130B30]"
-                >
-                  Farm size unit
-                </label>
-                <div className="rounded-lg bg-[#F3F6F8] p-3.5">
-                  <input
-                    id="farm_size_unit"
-                    type="text"
-                    className="w-full border-none text-sm text-[#423C59] outline-0 placeholder:text-sm placeholder:text-[#423C59] placeholder:opacity-70"
-                    placeholder="Acres"
-                  />
-                </div>
+              <div className="min-w-27">
+                <SelectDropdown
+                  mode="single"
+                  label="Farm size unit"
+                  options={farm_size_options}
+                  value={farmSize}
+                  onChange={setFarmSize}
+                  placeholder="Select farm size"
+                  headerTitle="Select farm size"
+                />
               </div>
             </div>
             <div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ChevronUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export interface SelectOption {
   label: string;
@@ -89,30 +90,26 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = (props) => {
   };
 
   return (
-    <div ref={ref} className="relative w-full max-w-sm">
-      {label && (
-        <label className="mb-1 block text-sm font-medium text-gray-700">
-          {label}
-        </label>
-      )}
+    <div ref={ref} className="relative w-full">
+      {label && <label className="mb-1 text-sm text-[#130B30]">{label}</label>}
 
       {/* Trigger */}
       <button
         type="button"
-        onClick={() => setOpen((o) => !o)}
-        className="flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-sm text-gray-600"
+        onClick={() => setOpen((prev) => !prev)}
+        className="flex h-13 w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-sm text-gray-600"
       >
         <span className="truncate">{selectedLabels || placeholder}</span>
-        <ChevronUp
+        <ArrowUp
           className={`h-4 w-4 transition ${open ? "rotate-0" : "rotate-180"}`}
         />
       </button>
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute z-50 mt-2 w-full rounded-xl border bg-white shadow-lg">
+        <div className="absolute z-50 mt-2 w-full min-w-3xs rounded-xl border bg-white shadow-lg">
           {/* Header */}
-          <div className="flex items-center justify-between border-b px-4 py-3">
+          <div className="flex items-center justify-between px-4 pt-3">
             <span className="text-sm font-medium text-gray-700">
               {headerTitle}
             </span>
@@ -131,15 +128,26 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = (props) => {
             {options.map((option) => (
               <label
                 key={option.value}
+                onClick={() => toggleValue(option.value)}
                 className="flex items-center gap-3 text-sm text-gray-700"
               >
-                <input
-                  type={isMulti ? "checkbox" : "radio"}
-                  name="select-dropdown"
-                  checked={selectedValues.includes(option.value)}
-                  onChange={() => toggleValue(option.value)}
-                  className="h-4 w-4 border-gray-300 text-green-700 focus:ring-green-600"
-                />
+                {isMulti ? (
+                  <Checkbox
+                    className="data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600 data-[state=checked]:text-white dark:data-[state=checked]:border-green-700 dark:data-[state=checked]:bg-blue-700"
+                    checked={selectedValues.includes(option.value)}
+                    onCheckedChange={() => toggleValue(option.value)}
+                  />
+                ) : (
+                  <div
+                    role="radio"
+                    onClick={() => toggleValue(option.value)}
+                    className="grid size-4 place-items-center rounded-full border border-[#0A814A] p-0.5"
+                  >
+                    {selectedValues.includes(option.value) && (
+                      <div className="size-full rounded-full bg-[#0A814A]"></div>
+                    )}
+                  </div>
+                )}
                 {option.label}
               </label>
             ))}
