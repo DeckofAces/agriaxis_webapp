@@ -20,14 +20,14 @@ function DashboardRootContent() {
   return (
     <section className="stable-gutter h-screen w-screen gap-4 overflow-hidden bg-[#F3F6F8] p-4 lg:flex">
       <div
-        className={`max-lg:h-[calc(100%-2rem)] max-lg:top-4 fixed inset-y-0 z-50 w-65 transform transition-transform duration-300 ease-in-out lg:static lg:inset-0 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`max-lg:h-[calc(100%-2rem)] max-lg:top-4 fixed inset-y-0 z-30 w-65 transform transition-transform duration-300 ease-in-out lg:static lg:inset-0 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <Sidebar />
       </div>
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          className="fixed inset-0 z-20 bg-black/50 lg:hidden"
           onClick={close}
         />
       )}
