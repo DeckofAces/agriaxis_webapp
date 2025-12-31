@@ -97,7 +97,7 @@ export const CropMonitoringServicePage: React.FC<{
         </div>
       </header>
       <section>
-        <div className="mb-6 flex items-center gap-3">
+        <div className="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           <StatCard
             icon={
               <div className="grid size-9.5 place-items-center rounded-[0.375rem] border border-[#0A814A] bg-[#E7F2ED]">

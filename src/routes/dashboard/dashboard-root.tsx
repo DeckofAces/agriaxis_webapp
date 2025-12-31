@@ -20,7 +20,7 @@ function DashboardRootContent() {
   return (
     <section className="stable-gutter h-screen w-screen gap-4 overflow-hidden bg-[#F3F6F8] p-4 lg:flex">
       <div
-        className={`max-lg:h-[calc(100%-2rem)] max-lg:top-4 fixed inset-y-0 z-30 w-65 transform transition-transform duration-300 ease-in-out lg:static lg:inset-0 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed inset-y-0 z-30 w-65 transform transition-transform duration-300 ease-in-out max-lg:top-4 max-lg:h-[calc(100%-2rem)] lg:static lg:inset-0 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <Sidebar />
       </div>
@@ -32,10 +32,8 @@ function DashboardRootContent() {
         />
       )}
 
-      <section
-        className={`ml-4 flex h-full w-full flex-col transition-all duration-300 lg:ml-0`}
-      >
-        <div className="mb-1">
+      <section className="ml-4 flex h-full w-full flex-col gap-2 pr-4 transition-all duration-300 lg:ml-0 lg:pr-0">
+        <div className="">
           <DashboardHeader />
         </div>
         <div className="flex-1 overflow-y-auto rounded-lg bg-white shadow">

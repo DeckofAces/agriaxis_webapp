@@ -111,7 +111,7 @@ export const FarmDetailsContainer: React.FC<{
               <span className="font-neue text-lg font-semibold text-[#434449]">{`${farm.size} Hectares`}</span>
             </div>
           </div>
-          <div className="mb-6 flex items-center gap-3">
+          <div className="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="flex w-full flex-col gap-2 rounded-xl bg-[#F3F6F8] p-4">
               <span className="font-medium text-[#626267]">
                 Soil PH <span className="text-[#64748B]">(from last test)</span>

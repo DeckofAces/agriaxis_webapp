@@ -10,7 +10,7 @@ import { useState } from "react";
 import { RequestSoilTestSheetsContainer } from "@/components/soil-testing/RequestSoilTestSheetsContainer";
 
 export default function SoilTesting() {
-  const [showRequestTest, setShowRequestTest] = useState(false)
+  const [showRequestTest, setShowRequestTest] = useState(false);
   const IS_EMPTY = false;
 
   return (
@@ -22,10 +22,15 @@ export default function SoilTesting() {
               Overview
             </h1>
             <div className="w-fit">
-              <Button variant="primary" onClick={() => setShowRequestTest(true)}>Request Test ₦25,000</Button>
+              <Button
+                variant="primary"
+                onClick={() => setShowRequestTest(true)}
+              >
+                Request Test ₦25,000
+              </Button>
             </div>
           </header>
-          <div className="flex items-center gap-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
             <StatCard
               icon={
                 <div className="grid size-9.5 place-items-center rounded-[0.375rem] border border-[#0A814A] bg-[#E7F2ED]">

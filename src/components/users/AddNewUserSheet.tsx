@@ -12,7 +12,7 @@ export const AddNewUserSheet: React.FC<{
       onClick={onClose}
     >
       <section
-        className="z-50 ml-auto h-full w-3/4 max-w-xl rounded-[1.25rem] bg-white p-8 pb-12"
+        className="z-50 ml-auto h-full w-full lg:w-3/4 lg:max-w-xl rounded-[1.25rem] bg-white p-8 pb-12"
         onClick={(e) => e.stopPropagation()}
       >
         <header className="mb-8 flex items-center gap-3.5">

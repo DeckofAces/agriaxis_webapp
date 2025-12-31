@@ -31,7 +31,7 @@ export const FarmMeasurementSelectionCard: React.FC<{
             </div>
           </header>
           <section className="mx-20 space-y-6 pb-10">
-            <div className="max-w-md translate-y-full space-y-6">
+            <div className="lg:max-w-md translate-y-full space-y-6">
               <Button onClick={() => onConfirm("existing")} variant="primary">
                 Use previous measurement
               </Button>

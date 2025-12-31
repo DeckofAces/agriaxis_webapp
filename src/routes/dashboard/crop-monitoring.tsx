@@ -48,7 +48,7 @@ export default function CropMonitoring() {
                 early before they damage your crops health.
               </h2>
             </header>
-            <div className="flex items-center gap-3">
+            <div className="grid lg:grid-cols-3 gap-3">
               <StatCard
                 icon={
                   <div className="grid size-9.5 place-items-center rounded-[0.375rem] border border-[#0A814A] bg-[#E7F2ED]">
@@ -78,7 +78,7 @@ export default function CropMonitoring() {
               />
             </div>
           </section>
-          <section>
+          <section className="pb-9">
             <header className="mb-4">
               <h1 className="font-neue text-lg font-semibold text-[#939397] sm:text-xl">
                 Services

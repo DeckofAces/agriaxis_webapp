@@ -31,7 +31,7 @@ export const FarmMeasurementMethodCard: React.FC<{
             </div>
           </header>
           <section className="mx-20 space-y-6 pb-10">
-            <div className="max-w-md space-y-6">
+            <div className="lg:max-w-md space-y-6">
               <button
                 onClick={() => setSelection("google")}
                 type="button"

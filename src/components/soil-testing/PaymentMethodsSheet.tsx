@@ -24,7 +24,7 @@ const paymentMethods: PaymentMethod[] = [
     imageSrc: "/assets/icons/bank.svg",
   },
   {
-    id: "2",
+    id: "3",
     title: "Paystack",
     subtitle: "Transaction via Paystack's gateway",
     imageSrc: "/assets/icons/paystack.png",

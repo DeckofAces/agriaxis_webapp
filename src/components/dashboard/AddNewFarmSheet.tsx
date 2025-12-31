@@ -21,7 +21,7 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
       onClick={onClose}
     >
       <section
-        className="z-50 ml-auto h-full w-full lg:w-[calc(100vw-19rem)] rounded-[1.25rem] bg-white p-8"
+        className="z-50 ml-auto h-full w-full lg:w-[calc(100vw-19rem)] rounded-[1.25rem] bg-white p-8 overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <header className="mb-8 flex items-center gap-3.5">
@@ -35,7 +35,7 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
             Add new farm details
           </h5>
         </header>
-        <section className="grid grid-cols-2 gap-10">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <section className="space-y-6">
             <header>
               <h6 className="text-lg font-semibold text-[#939397]">Details</h6>

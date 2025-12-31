@@ -28,7 +28,7 @@ export const RequestCropInformationSheetsContainer: React.FC<{
       onClick={onClose}
     >
       <section
-        className="z-50 ml-auto h-full w-3/4 max-w-xl rounded-[1.25rem] bg-white"
+        className="z-50 ml-auto h-full w-full lg:w-3/4 lg:max-w-xl rounded-[1.25rem] bg-white"
         onClick={(e) => e.stopPropagation()}
       >
         <Activity mode={currentView === "details" ? "visible" : "hidden"}>

@@ -92,7 +92,7 @@ export default function DashboardIndex() {
                   Individual farm status
                 </h1>
               </header>
-              <div className="grid w-full grid-cols-2 gap-4">
+              <div className="grid w-full grid-cols-1 md:grid-cols-2 gap-4">
                 {farmStatus.map((entry) => (
                   <FarmStatusCard
                     key={entry.id}

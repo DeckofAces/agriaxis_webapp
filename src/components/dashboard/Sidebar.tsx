@@ -1,3 +1,4 @@
+import { useSidebar } from "@/contexts/SidebarContext";
 import { Link } from "@tanstack/react-router";
 import { LogOut } from "lucide-react";
 import React from "react";
@@ -144,6 +145,7 @@ const NavItem: React.FC<NavItemType> = ({ label, icon, path, isDisabled }) => {
   const baseClasses =
     "flex items-center space-x-3 p-3 text-sm font-medium transition-colors duration-200 rounded-lg cursor-pointer";
   const disabledClasses = "opacity-70 !cursor-not-allowed";
+  const { close } = useSidebar();
 
   return (
     <Link
@@ -157,6 +159,7 @@ const NavItem: React.FC<NavItemType> = ({ label, icon, path, isDisabled }) => {
         className: "text-white hover:bg-white/10 [&_.icon-wrapper]:text-white",
       }}
       disabled={isDisabled}
+      onClick={!isDisabled ? close : undefined}
     >
       <span className="icon-wrapper">{icon}</span>
       <span className="w-32 truncate">{label}</span>
@@ -165,6 +168,7 @@ const NavItem: React.FC<NavItemType> = ({ label, icon, path, isDisabled }) => {
 };
 
 const Sidebar: React.FC = () => {
+
   return (
     <div className="flex h-full w-full flex-col rounded-[1.25rem] bg-[#1E8838] p-4">
       <div className="mb-8">
