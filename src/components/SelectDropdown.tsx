@@ -11,7 +11,7 @@ interface BaseProps {
   label?: string;
   options: SelectOption[];
   placeholder?: string;
-  headerTitle?: string;
+  headerTitle: string;
   doneLabel?: string;
 }
 
@@ -116,7 +116,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = (props) => {
             {isMulti && (
               <button
                 onClick={() => setOpen(false)}
-                className="rounded-md bg-green-700 px-3 py-1 text-xs font-semibold text-white hover:bg-green-800"
+                className="rounded-md bg-green-700 px-6 py-2 text-xs font-semibold text-white hover:bg-green-800"
               >
                 {doneLabel}
               </button>

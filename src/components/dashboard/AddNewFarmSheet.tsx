@@ -8,6 +8,62 @@ const farm_size_options: SelectOption[] = [
   { label: "Hectare", value: "hectare" },
 ];
 
+const crop_type_options: SelectOption[] = [
+  { label: "Cocoa", value: "cocoa" },
+  { label: "Rice", value: "rice" },
+  { label: "Maize", value: "maize" },
+  { label: "Beans", value: "beans" },
+  { label: "Yam", value: "yam" },
+  { label: "Cassava", value: "cassava" },
+  { label: "Barley", value: "barley" },
+  { label: "Quinoa", value: "quinoa" },
+  { label: "Oats", value: "oats" },
+  { label: "Millet", value: "millet" },
+];
+
+const vegetable_type_options: SelectOption[] = [
+  { label: "Onion", value: "onion" },
+  { label: "Tomato", value: "tomato" },
+  { label: "Carrot", value: "carrot" },
+  { label: "Lettuce", value: "lettuce" },
+  { label: "Cucumber", value: "cucumber" },
+  { label: "Potato", value: "potato" },
+  { label: "Cabbage", value: "cabbage" },
+  { label: "Cauliflower", value: "cauliflower" },
+];
+
+const state_options: SelectOption[] = [
+  { label: "Abuja", value: "abuja" },
+  { label: "Lagos", value: "lagos" },
+  { label: "Kaduna", value: "kaduna" },
+  { label: "Sokoto", value: "sokoto" },
+];
+
+const city_options: SelectOption[] = [
+  { label: "Aba", value: "aba" },
+  { label: "Abeokuta", value: "abeokuta" },
+  { label: "Ado-Ekiti", value: "ado-ekiti" },
+  { label: "Akoko", value: "akoko" },
+  { label: "Akure", value: "akure" },
+  { label: "Amuwo-Odofin", value: "amuwo-odofin" },
+  { label: "Enugu", value: "enugu" },
+];
+
+const lga_options: SelectOption[] = [
+  { label: "Abaji", value: "abaji" },
+  { label: "Abeokuta", value: "abeokuta" },
+  { label: "Ado-Ekiti", value: "ado-ekiti" },
+  { label: "Akoko", value: "akoko" },
+  { label: "Akure", value: "akure" },
+  { label: "Amuwo-Odofin", value: "amuwo-odofin" },
+  { label: "Enugu", value: "enugu" },
+  { label: "Ife", value: "ife" },
+  { label: "Ilorin", value: "ilorin" },
+  { label: "Irepodun", value: "irepodun" },
+  { label: "Iseyin", value: "iseyin" },
+  { label: "Kaduna", value: "kaduna" },
+  { label: "Kano", value: "kano" },
+];
 
 const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
   onClose,
@@ -16,6 +72,10 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
   if (!isOpen) return null;
   const [farmSize, setFarmSize] = useState<string | null>(null);
   const [cropType, setCropType] = useState<string[]>([]);
+  const [vegetableType, setVegetableType] = useState<string[]>([]);
+  const [state, setState] = useState<string | null>(null);
+  const [city, setCity] = useState<string | null>(null);
+  const [lga, setLga] = useState<string | null>(null);
 
   return (
     <section
@@ -88,36 +148,26 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
               </div>
             </div>
             <div>
-              <label
-                htmlFor="crop_type"
-                className="mb-1.5 text-sm text-[#130B30]"
-              >
-                Crop type
-              </label>
-              <div className="rounded-lg bg-[#F3F6F8] p-3.5">
-                <input
-                  id="crop_type"
-                  type="text"
-                  className="w-full border-none text-sm text-[#423C59] outline-0 placeholder:text-sm placeholder:text-[#423C59] placeholder:opacity-70"
-                  placeholder="Select one or more crops you have"
-                />
-              </div>
+              <SelectDropdown
+                mode="multiple"
+                label="Crop type"
+                options={crop_type_options}
+                value={cropType}
+                onChange={setCropType}
+                placeholder="Select one or more crops you have"
+                headerTitle="Select crops"
+              />
             </div>
             <div>
-              <label
-                htmlFor="vegetable_type"
-                className="mb-1.5 text-sm text-[#130B30]"
-              >
-                Vegetable type
-              </label>
-              <div className="rounded-lg bg-[#F3F6F8] p-3.5">
-                <input
-                  id="vegetable_type"
-                  type="text"
-                  className="w-full border-none text-sm text-[#423C59] outline-0 placeholder:text-sm placeholder:text-[#423C59] placeholder:opacity-70"
-                  placeholder="Select one or more vegetables you have"
-                />
-              </div>
+              <SelectDropdown
+                mode="multiple"
+                label="Vegetable type"
+                options={vegetable_type_options}
+                value={vegetableType}
+                onChange={setVegetableType}
+                placeholder="Select one or more vegetables you have"
+                headerTitle="Select vegetables"
+              />
             </div>
           </section>
           <section className="space-y-6">
@@ -127,43 +177,37 @@ const AddNewFarmSheet: React.FC<{ onClose: () => void; isOpen: boolean }> = ({
               </h6>
             </header>
             <div>
-              <label htmlFor="state" className="mb-1.5 text-sm text-[#130B30]">
-                State
-              </label>
-              <div className="rounded-lg bg-[#F3F6F8] p-3.5">
-                <input
-                  id="state"
-                  type="text"
-                  className="w-full border-none text-sm text-[#423C59] outline-0 placeholder:text-sm placeholder:text-[#423C59] placeholder:opacity-70"
-                  placeholder="Select state"
-                />
-              </div>
+              <SelectDropdown
+                mode="single"
+                label="State"
+                options={state_options}
+                value={state}
+                onChange={setState}
+                placeholder="Select state"
+                headerTitle="Select state"
+              />
             </div>
             <div>
-              <label htmlFor="city" className="mb-1.5 text-sm text-[#130B30]">
-                City
-              </label>
-              <div className="rounded-lg bg-[#F3F6F8] p-3.5">
-                <input
-                  id="city"
-                  type="text"
-                  className="w-full border-none text-sm text-[#423C59] outline-0 placeholder:text-sm placeholder:text-[#423C59] placeholder:opacity-70"
-                  placeholder="Select city"
-                />
-              </div>
+              <SelectDropdown
+                mode="single"
+                label="City"
+                options={city_options}
+                value={city}
+                onChange={setCity}
+                placeholder="Select city"
+                headerTitle="Select city"
+              />
             </div>
             <div>
-              <label htmlFor="lga" className="mb-1.5 text-sm text-[#130B30]">
-                Local Government (LGA)
-              </label>
-              <div className="rounded-lg bg-[#F3F6F8] p-3.5">
-                <input
-                  id="lga"
-                  type="text"
-                  className="w-full border-none text-sm text-[#423C59] outline-0 placeholder:text-sm placeholder:text-[#423C59] placeholder:opacity-70"
-                  placeholder="Select LGA"
-                />
-              </div>
+              <SelectDropdown
+                mode="single"
+                label="Local Government (LGA)"
+                options={lga_options}
+                value={lga}
+                onChange={setLga}
+                placeholder="Select LGA"
+                headerTitle="Select LGA"
+              />
             </div>
             <div className="mb-20">
               <label
