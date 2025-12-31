@@ -159,7 +159,7 @@ const NavItem: React.FC<NavItemType> = ({ label, icon, path, isDisabled }) => {
       disabled={isDisabled}
     >
       <span className="icon-wrapper">{icon}</span>
-      <span>{label}</span>
+      <span className="w-32 truncate">{label}</span>
     </Link>
   );
 };

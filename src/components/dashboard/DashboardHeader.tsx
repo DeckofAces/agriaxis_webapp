@@ -1,8 +1,9 @@
-import React from 'react';
-import { Search, Bell, ChevronsRight } from 'lucide-react';
+import React from "react";
+import { Search, Bell, ChevronsRight } from "lucide-react";
 import { useState } from "react";
 import NotificationPermissionModal from "@/components/dashboard/NotificationPermissionModal";
-import LocationPermissionModal from '@/components/dashboard/LocationPermissionModal';
+import LocationPermissionModal from "@/components/dashboard/LocationPermissionModal";
+import { useSidebar } from "@/contexts/SidebarContext";
 
 interface IconButtonProps {
   children: React.ReactNode;
@@ -10,25 +11,28 @@ interface IconButtonProps {
 }
 
 const IconButton: React.FC<IconButtonProps> = ({ children, badge = false }) => (
-  <button className="relative p-3 rounded-full hover:bg-gray-100 bg-[#F1F5F9] transition duration-150 ease-in-out text-gray-700">
+  <button className="relative rounded-full bg-[#F1F5F9] p-3 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100">
     {children}
     {badge && (
-      <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full border-2 border-white"></span>
+      <span className="absolute top-1 right-1 h-2 w-2 rounded-full border-2 border-white bg-red-500"></span>
     )}
   </button>
 );
 
 const ProfileButton: React.FC = () => (
-  <button className="flex items-center space-x-2 p-1 pl-1 pr-3 rounded-full bg-white border border-gray-200 hover:shadow-md transition duration-150 ease-in-out">
-    <div className="relative w-8 h-8 flex items-center justify-center text-sm font-semibold bg-green-100 text-green-700 rounded-full border-2 border-green-500">
+  <button className="flex items-center space-x-2 rounded-full border border-gray-200 bg-white p-1 pr-3 pl-1 transition duration-150 ease-in-out hover:shadow-md">
+    <div className="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-green-500 bg-green-100 text-sm font-semibold text-green-700">
       AJ
     </div>
-    <ChevronsRight className="w-5 h-5 text-gray-500" />
+    <ChevronsRight className="h-5 w-5 text-gray-500" />
   </button>
 );
 
 const DashboardHeader: React.FC = () => {
-  const [isNotificationPermissionModalOpen, setIsNotificationPermissionModalOpen] = useState(false);
+  const [
+    isNotificationPermissionModalOpen,
+    setIsNotificationPermissionModalOpen,
+  ] = useState(false);
 
   const handleAllowNotification = () => {
     setIsNotificationPermissionModalOpen(false);
@@ -37,7 +41,8 @@ const DashboardHeader: React.FC = () => {
     setIsNotificationPermissionModalOpen(false);
   };
 
-  const [isLocationPermissionModalOpen, setIsLocationPermissionModalOpen] = useState(false);
+  const [isLocationPermissionModalOpen, setIsLocationPermissionModalOpen] =
+    useState(false);
 
   const handleAllowLocation = () => {
     setIsLocationPermissionModalOpen(false);
@@ -46,21 +51,42 @@ const DashboardHeader: React.FC = () => {
     setIsLocationPermissionModalOpen(false);
   };
 
+  const { toggle } = useSidebar();
+
   return (
-    <header className="flex items-center justify-between p-4 sm:p-6 bg-white rounded-[1.25rem] border-b border-[#E6EBF0]">
+    <header className="flex items-center justify-between rounded-[1.25rem] border-b border-[#E6EBF0] bg-white p-4 sm:p-6">
+      <button
+        onClick={toggle}
+        className="rounded-md p-2 hover:bg-gray-100 lg:hidden"
+        aria-label="Open sidebar"
+      >
+        <svg
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
       <div className="flex items-center space-x-4">
-        <h1 className="text-2xl sm:text-3xl font-bold font-neue text-[#0F172A]">
+        <h1 className="font-neue text-2xl font-bold text-[#0F172A] sm:text-3xl">
           Dashboard
         </h1>
       </div>
 
       <div className="flex items-center space-x-2 sm:space-x-3">
         <IconButton>
-          <Search className="w-5 h-5" />
+          <Search className="h-5 w-5" />
         </IconButton>
 
         <IconButton badge={true}>
-          <Bell className="w-5 h-5" />
+          <Bell className="h-5 w-5" />
         </IconButton>
 
         <ProfileButton />
