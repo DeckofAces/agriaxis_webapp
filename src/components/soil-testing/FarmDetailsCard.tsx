@@ -50,7 +50,8 @@ const FarmDetailsCard: React.FC<{
   isOpen?: boolean;
   onClose: () => void;
   onConfirm: () => void;
-}> = ({ isOpen, onClose, onConfirm }) => {
+  requestServiceType?: string;
+}> = ({ isOpen, onClose, onConfirm, requestServiceType }) => {
   const [cropType, setCropType] = useState("cocoa");
   // if (!isOpen) return null;
 
@@ -68,7 +69,7 @@ const FarmDetailsCard: React.FC<{
             Farm details
           </h5>
           <h6 className="text-[#423C59]">
-            Let's know the farm and crop type you are requesting soil test for
+            Let's know the farm and crop type you are requesting {requestServiceType ?? 'soil test'} for
           </h6>
         </div>
       </header>

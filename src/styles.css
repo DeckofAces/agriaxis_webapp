@@ -157,3 +157,8 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+
+.stable-gutter {
+  scrollbar-gutter: stable;
+}

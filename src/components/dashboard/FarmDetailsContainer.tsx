@@ -36,6 +36,7 @@ export const FarmDetailsContainer: React.FC<{
     {
       accessorKey: "payment",
       header: "Payment",
+      cell: ({ row }) => <span>₦{row.original.payment.toLocaleString()}</span>,
     },
     {
       accessorKey: "date",

@@ -6,16 +6,18 @@ interface ServiceCardProps {
   title: string;
   value: string;
   className?: string;
+  onClick?: () => void;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
   icon,
   title,
   value,
-  className = ''
+  className = '',
+  onClick
 }) => {
   return (
-    <div className={`bg-white rounded-2xl w-full border border-[#E8E8E8] p-3 ${className}`}>
+    <div className={`bg-white rounded-2xl w-full border border-[#E8E8E8] p-3 ${className}`} onClick={onClick}>
       <div className="flex flex-col">
         <div className='w-full flex items-start justify-between'>
           <div className="size-10 flex items-center justify-center">
