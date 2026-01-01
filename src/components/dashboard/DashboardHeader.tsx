@@ -4,6 +4,7 @@ import { useState } from "react";
 import NotificationPermissionModal from "@/components/dashboard/NotificationPermissionModal";
 import LocationPermissionModal from "@/components/dashboard/LocationPermissionModal";
 import { useSidebar } from "@/contexts/SidebarContext";
+import { useMatches } from "@tanstack/react-router";
 
 interface IconButtonProps {
   children: React.ReactNode;
@@ -52,6 +53,7 @@ const DashboardHeader: React.FC = () => {
   };
 
   const { toggle } = useSidebar();
+  const matches = useMatches();
 
   return (
     <header className="flex items-center justify-between rounded-[1.25rem] border-b border-[#E6EBF0] bg-white p-4 sm:p-6">
@@ -76,7 +78,9 @@ const DashboardHeader: React.FC = () => {
       </button>
       <div className="flex items-center space-x-4">
         <h1 className="font-neue text-2xl font-bold text-[#0F172A] sm:text-3xl">
-          Dashboard
+          {matches.map((match: any) => {
+            return <div key={match.id}>{match.staticData.title}</div>;
+          })}
         </h1>
       </div>
 
