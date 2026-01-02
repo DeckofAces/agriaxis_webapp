@@ -6,6 +6,7 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
+  redirect,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import FormSimpleDemo from "./routes/demo/form.simple.tsx";
@@ -138,6 +139,21 @@ const dashboardRoute = createRoute({
 
 const dashboardIndexRoute = createRoute({
   getParentRoute: () => dashboardRoute,
+  path: "/",
+  component: DashboardIndex,
+  staticData: {
+    title: "Dashboard",
+  },
+  loader: () => {
+    throw redirect({
+      to: "/dashboard/dashboard",
+      replace: true
+    })
+  }
+});
+
+const dashboardHomeRoute = createRoute({
+  getParentRoute: () => dashboardRoute,
   path: "dashboard",
   component: DashboardIndex,
   staticData: {
@@ -206,6 +222,7 @@ const routeTree = rootRoute.addChildren([
   organisationRoute,
   dashboardRoute,
   dashboardIndexRoute,
+  dashboardHomeRoute,
   soilTestingRoute,
   cropInformationRoute,
   cropMonitoringRoute,
