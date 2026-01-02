@@ -1,14 +1,12 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import {
-  Outlet,
   RouterProvider,
   createRootRoute,
   createRoute,
   createRouter,
   redirect,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import FormSimpleDemo from "./routes/demo/form.simple.tsx";
 import FormAddressDemo from "./routes/demo/form.address.tsx";
 import TableDemo from "./routes/demo/table.tsx";
@@ -44,31 +42,41 @@ import roles from "./routes/dashboard/roles.tsx";
 import users from "./routes/dashboard/users.tsx";
 
 const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      {/* <Header /> */}
-      <Outlet />
-      {/* <TanStackRouterDevtools /> */}
-    </>
-  ),
+  component: App
+});
+
+const splashRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/splash",
+  component: Splash,
 });
 
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: App,
-});
-
-const splashRoute = createRoute({
-  getParentRoute: () => indexRoute,
-  path: "/splash",
-  component: Splash,
+  loader: () => {
+    throw redirect({
+      to: "/auth",
+      replace: true
+    })
+  }
 });
 
 const authRoute = createRoute({
-  getParentRoute: () => indexRoute,
+  getParentRoute: () => rootRoute,
   path: "auth",
   component: AuthIndex,
+});
+
+const authIndexRoute = createRoute({
+  getParentRoute: () => authRoute,
+  path: "/",
+  loader: () => {
+    throw redirect({
+      to: "/auth/get-started",
+      replace: true
+    })
+  }
 });
 
 const getStartedRoute = createRoute({
@@ -132,7 +140,7 @@ const organisationRoute = createRoute({
 });
 
 const dashboardRoute = createRoute({
-  getParentRoute: () => indexRoute,
+  getParentRoute: () => rootRoute,
   path: "dashboard",
   component: DashboardRoot,
 });
@@ -140,7 +148,6 @@ const dashboardRoute = createRoute({
 const dashboardIndexRoute = createRoute({
   getParentRoute: () => dashboardRoute,
   path: "/",
-  component: DashboardIndex,
   staticData: {
     title: "Dashboard",
   },
@@ -207,9 +214,10 @@ const usersRoute = createRoute({
 });
 
 const routeTree = rootRoute.addChildren([
-  indexRoute,
   splashRoute,
+  indexRoute,
   authRoute,
+  authIndexRoute,
   getStartedRoute,
   selectCountryRoute,
   farmTypeRoute,
