@@ -30,7 +30,7 @@ export default function OtpVerification() {
           Enter code in: <CountdownTimer />
         </p>
       </section>
-      <Link to="/auth/create-password" className="block">
+      <Link to="/create-password" className="block">
         <Button variant="primary">Continue</Button>
       </Link>
     </div>

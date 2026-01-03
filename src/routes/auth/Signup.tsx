@@ -179,7 +179,7 @@ export default function Signup() {
         </>
       </section>
       <div>
-        <Link to="/auth/otp-verification">
+        <Link to="/otp-verification">
           <Button variant="primary">Sign up</Button>
         </Link>
         <div className="w-fit mx-auto text-center mt-6">
@@ -190,7 +190,7 @@ export default function Signup() {
           </div>
         </div>
       </div>
-      <p className="w-fit mx-auto">Already have an account? <Link to="/auth/signin"><span className="ml-3 text-[#0A814A] cursor-pointer">Sign in</span></Link></p>
+      <p className="w-fit mx-auto">Already have an account? <Link to="/signin"><span className="ml-3 text-[#0A814A] cursor-pointer">Sign in</span></Link></p>
     </div>
   )
 } 

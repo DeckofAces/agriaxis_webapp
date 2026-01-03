@@ -48,7 +48,7 @@ export default function CreatePassword() {
             </div>
           </div>
         </section>
-        <Link to="/auth/organisation" className="block">
+        <Link to="/organisation" className="block">
           <Button variant="primary" >Continue</Button>
         </Link>
       </div>

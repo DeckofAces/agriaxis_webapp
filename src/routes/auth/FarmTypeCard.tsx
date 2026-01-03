@@ -73,7 +73,7 @@ export default function FarmTypeCard() {
           />
         ))}
       </section>
-      <Link to="/auth/signup" className="block">
+      <Link to="/signup" className="block">
         <Button variant="primary">Continue</Button>
       </Link>
     </div>

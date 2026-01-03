@@ -13,10 +13,10 @@ export default function GetStartedCard() {
         </h6>
       </header>
       <section className="mb-2.5 space-y-4">
-        <Link to="/auth/select-country" className="block">
+        <Link to="/select-country" className="block">
           <Button variant="primary">Create an Account</Button>
         </Link>
-        <Link to="/auth/signin" className="block">
+        <Link to="/signin" className="block">
           <Button variant="secondary">Login</Button>
         </Link>
       </section>

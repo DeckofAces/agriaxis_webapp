@@ -122,7 +122,7 @@ export default function SelectCountryCard() {
         </PopoverContent>
       </Popover>
       <div>
-        <Link to="/auth/farm-type" className="block">
+        <Link to="/farm-type" className="block">
           <Button variant="primary">Continue</Button>
         </Link>
       </div>

@@ -49,7 +49,7 @@ const indexRoute = createRoute({
   path: "/",
   loader: () => {
     throw redirect({
-      to: "/auth",
+      to: "/get-started",
       replace: true
     })
   }
@@ -57,19 +57,8 @@ const indexRoute = createRoute({
 
 const authRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "auth",
+  id: "auth",
   component: AuthIndex,
-});
-
-const authIndexRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "/",
-  loader: () => {
-    throw redirect({
-      to: "/auth/get-started",
-      replace: true
-    })
-  }
 });
 
 const getStartedRoute = createRoute({
@@ -209,18 +198,18 @@ const usersRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   splashRoute,
   indexRoute,
-  authRoute,
-  authIndexRoute,
-  getStartedRoute,
-  selectCountryRoute,
-  farmTypeRoute,
-  signinRoute,
-  createPasswordRoute,
-  forgotPasswordRoute,
-  otpVerificationRoute,
-  resetPasswordRoute,
-  signupRoute,
-  organisationRoute,
+  authRoute.addChildren([
+    getStartedRoute,
+    selectCountryRoute,
+    farmTypeRoute,
+    signinRoute,
+    createPasswordRoute,
+    forgotPasswordRoute,
+    otpVerificationRoute,
+    resetPasswordRoute,
+    signupRoute,
+    organisationRoute,
+  ]),
   dashboardRoute,
   dashboardIndexRoute,
   dashboardHomeRoute,
