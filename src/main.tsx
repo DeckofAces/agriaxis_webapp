@@ -210,14 +210,15 @@ const routeTree = rootRoute.addChildren([
     signupRoute,
     organisationRoute,
   ]),
-  dashboardRoute,
-  dashboardIndexRoute,
-  dashboardHomeRoute,
-  soilTestingRoute,
-  cropInformationRoute,
-  cropMonitoringRoute,
-  rolesRoute,
-  usersRoute,
+  dashboardRoute.addChildren([
+    dashboardIndexRoute,
+    dashboardHomeRoute,
+    soilTestingRoute,
+    cropInformationRoute,
+    cropMonitoringRoute,
+    rolesRoute,
+    usersRoute,
+  ]),
 ]);
 
 const TanStackQueryProviderContext = TanStackQueryProvider.getContext();
