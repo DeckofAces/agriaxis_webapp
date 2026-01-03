@@ -26,7 +26,7 @@ import Signup from "./routes/auth/Signup.tsx";
 import Organisation from "./routes/auth/Organisation.tsx";
 import Splash from "./routes/Splash.tsx";
 import DashboardLayout from "./routes/dashboard/DashboardLayout.tsx";
-import DashboardIndex from "./routes/dashboard/index.tsx";
+import DashboardIndex from "./routes/dashboard/DashboardIndex.tsx";
 import soilTesting from "./routes/dashboard/SoilTesting.tsx";
 import cropInformation from "./routes/dashboard/CropInformation.tsx";
 import cropMonitoring from "./routes/dashboard/CropMonitoring.tsx";
