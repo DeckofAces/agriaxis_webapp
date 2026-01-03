@@ -14,7 +14,7 @@ import "./styles.css";
 import reportWebVitals from "./reportWebVitals.ts";
 
 import App from "./App.tsx";
-import AuthIndex from "./routes/auth/AuthIndex.tsx";
+import AuthLayout from "./routes/auth/AuthLayout.tsx";
 import GetStartedCard from "./routes/auth/GetStartedCard.tsx";
 import SelectCountryCard from "./routes/auth/SelectCountryCard.tsx";
 import FarmTypeCard from "./routes/auth/FarmTypeCard.tsx";
@@ -25,14 +25,14 @@ import ResetPassword from "./routes/auth/ResetPassword.tsx";
 import Signup from "./routes/auth/Signup.tsx";
 import Organisation from "./routes/auth/Organisation.tsx";
 import Splash from "./routes/Splash.tsx";
-import DashboardRoot from "./routes/dashboard/dashboard-root.tsx";
+import DashboardLayout from "./routes/dashboard/DashboardLayout.tsx";
 import DashboardIndex from "./routes/dashboard/index.tsx";
-import soilTesting from "./routes/dashboard/soil-testing.tsx";
-import cropInformation from "./routes/dashboard/crop-information.tsx";
-import cropMonitoring from "./routes/dashboard/crop-monitoring.tsx";
+import soilTesting from "./routes/dashboard/SoilTesting.tsx";
+import cropInformation from "./routes/dashboard/CropInformation.tsx";
+import cropMonitoring from "./routes/dashboard/CropMonitoring.tsx";
 import CreatePassword from "./routes/auth/CreatePassword.tsx";
-import roles from "./routes/dashboard/roles.tsx";
-import users from "./routes/dashboard/users.tsx";
+import roles from "./routes/dashboard/Roles.tsx";
+import users from "./routes/dashboard/Users.tsx";
 
 const rootRoute = createRootRoute({
   component: App
@@ -58,7 +58,7 @@ const indexRoute = createRoute({
 const authRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: "auth",
-  component: AuthIndex,
+  component: AuthLayout,
 });
 
 const getStartedRoute = createRoute({
@@ -124,7 +124,7 @@ const organisationRoute = createRoute({
 const dashboardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "dashboard",
-  component: DashboardRoot,
+  component: DashboardLayout,
 });
 
 const dashboardIndexRoute = createRoute({

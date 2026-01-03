@@ -4,7 +4,7 @@ import { Outlet } from "@tanstack/react-router";
 import { useSidebar, SidebarProvider } from "@/contexts/SidebarContext";
 import { useEffect } from "react";
 
-function DashboardRootContent() {
+function DashboardLayoutContent() {
   const { isOpen, close } = useSidebar();
 
   useEffect(() => {
@@ -44,10 +44,10 @@ function DashboardRootContent() {
   );
 }
 
-export default function DashboardRoot() {
+export default function DashboardLayout() {
   return (
     <SidebarProvider>
-      <DashboardRootContent />
+      <DashboardLayoutContent />
     </SidebarProvider>
   );
 }
