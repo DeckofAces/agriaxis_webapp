@@ -35,6 +35,15 @@ import RolesRoute from "./routes/dashboard/Roles.tsx";
 import UsersRoute from "./routes/dashboard/Users.tsx";
 
 const rootRoute = createRootRoute({
+  head: () => ({
+    meta: [
+      {
+        name: "description",
+        content: "This is the Admin application of Agri Axis",
+      },
+      { title: "AgriAxis - Farm Intelligence" },
+    ],
+  }),
   component: App,
 });
 
