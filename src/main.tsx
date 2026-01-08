@@ -55,78 +55,6 @@ const indexRoute = createRoute({
   },
 });
 
-// const authRoute = createRoute({
-//   getParentRoute: () => rootRoute,
-//   id: "auth",
-//   component: AuthLayout,
-// });
-
-// const getStartedRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "get-started",
-//   component: GetStartedCard,
-// });
-
-// const selectCountryRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "select-country",
-//   component: SelectCountryCard,
-// });
-
-// const farmTypeRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "farm-type",
-//   component: FarmTypeCard,
-// });
-
-// const signinRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "signin",
-//   component: Signin,
-// });
-
-// const createPasswordRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "create-password",
-//   component: CreatePassword,
-// });
-
-// const forgotPasswordRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "forgot-password",
-//   component: ForgotPassword,
-// });
-
-// const otpVerificationRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "otp-verification",
-//   component: OtpVerification,
-// });
-
-// const resetPasswordRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "reset-password",
-//   component: ResetPassword,
-// });
-
-// const signupRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "signup",
-//   component: Signup,
-// });
-
-// const organisationRoute = createRoute({
-//   getParentRoute: () => authRoute,
-//   path: "organisation",
-//   component: Organisation,
-// });
-
-// const dashboardRoute = createRoute({
-//   getParentRoute: () => rootRoute,
-//   path: "dashboard",
-//   component: DashboardLayout,
-// });
-
 const dashboardHomeRoute = createRoute({
   getParentRoute: () => dashboardLayoutRoute,
   path: "/",
@@ -140,60 +68,6 @@ const dashboardHomeRoute = createRoute({
     });
   },
 });
-
-// const dashboardHomeRoute = createRoute({
-//   getParentRoute: () => dashboardLayoutRoute,
-//   path: "dashboard",
-//   component: DashboardIndex,
-//   staticData: {
-//     title: "Dashboard",
-//   },
-// });
-
-// const soilTestingRoute = createRoute({
-//   getParentRoute: () => dashboardRoute,
-//   path: "soil-testing",
-//   component: soilTesting,
-//   staticData: {
-//     title: "Soil Testing",
-//   },
-// });
-
-// const cropInformationRoute = createRoute({
-//   getParentRoute: () => dashboardRoute,
-//   path: "crop-information",
-//   component: cropInformation,
-//   staticData: {
-//     title: "Crop Information",
-//   },
-// });
-
-// const cropMonitoringRoute = createRoute({
-//   getParentRoute: () => dashboardRoute,
-//   path: "crop-monitoring",
-//   component: cropMonitoring,
-//   staticData: {
-//     title: "Crop Monitoring",
-//   },
-// });
-
-// const rolesRoute = createRoute({
-//   getParentRoute: () => dashboardRoute,
-//   path: "roles",
-//   component: roles,
-//   staticData: {
-//     title: "Roles & Permission",
-//   },
-// });
-
-// const usersRoute = createRoute({
-//   getParentRoute: () => dashboardRoute,
-//   path: "users",
-//   component: users,
-//   staticData: {
-//     title: "User Management",
-//   },
-// });
 
 const authRoute = AuthLayoutRoute(rootRoute);
 const dashboardLayoutRoute = DashboardLayoutRoute(rootRoute);
