@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { allCountries, type Country } from "@/data/countries";
 import facebookIcon from "/assets/icons/facebook.svg";
 import googleIcon from "/assets/icons/google.svg";
-import { useNavigate } from "@tanstack/react-router";
+import { createRoute, type AnyRoute } from "@tanstack/react-router";
 
 const flagStyle = {
   fontSize: "1.25rem",
@@ -15,8 +15,7 @@ const flagStyle = {
 type LoginType = "phone" | "email";
 const LOGIN_TYPE: LoginType = "phone";
 
-export default function Signin() {
-
+function Signin() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(
@@ -206,3 +205,10 @@ export default function Signin() {
     </div>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: 'signin',
+    component: Signin,
+    getParentRoute: () => parentRoute,
+  })

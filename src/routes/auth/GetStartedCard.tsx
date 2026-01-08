@@ -1,7 +1,7 @@
 import { Button } from "@/components/Button";
-import { Link } from "@tanstack/react-router";
+import { createRoute, Link, type AnyRoute } from "@tanstack/react-router";
 
-export default function GetStartedCard() {
+function GetStartedCard() {
   return (
     <div className="max-w-5/12 min-w-135 rounded-3xl bg-white p-16">
       <header className="mb-24 space-y-2">
@@ -29,3 +29,10 @@ export default function GetStartedCard() {
     </div>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: 'get-started',
+    component: GetStartedCard,
+    getParentRoute: () => parentRoute,
+  })

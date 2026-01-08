@@ -1,8 +1,8 @@
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import Sidebar from "@/components/dashboard/Sidebar";
-import { Outlet } from "@tanstack/react-router";
 import { useSidebar, SidebarProvider } from "@/contexts/SidebarContext";
 import { useEffect } from "react";
+import { createRoute, Outlet, type AnyRoute } from "@tanstack/react-router";
 
 function DashboardLayoutContent() {
   const { isOpen, close } = useSidebar();
@@ -44,10 +44,17 @@ function DashboardLayoutContent() {
   );
 }
 
-export default function DashboardLayout() {
+function DashboardLayout() {
   return (
     <SidebarProvider>
       <DashboardLayoutContent />
     </SidebarProvider>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: "dashboard",
+    component: DashboardLayout,
+    getParentRoute: () => parentRoute,
+  });

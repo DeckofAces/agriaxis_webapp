@@ -10,11 +10,12 @@ import {
 import { AddNewUserSheet } from "@/components/users/AddNewUserSheet";
 import { generateUsers } from "@/data/user.data";
 import type { User } from "@/models/user.model";
+import { createRoute, type AnyRoute } from "@tanstack/react-router";
 import type { ColumnDef } from "@tanstack/react-table";
 import { MoreVertical } from "lucide-react";
 import { Activity, useMemo, useState } from "react";
 
-export default function Users() {
+function Users() {
   const userColumns: ColumnDef<User>[] = [
     {
       accessorKey: "id",
@@ -99,3 +100,13 @@ export default function Users() {
     </>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: "users",
+    component: Users,
+    getParentRoute: () => parentRoute,
+    staticData: {
+      title: "User Management",
+    },
+  });

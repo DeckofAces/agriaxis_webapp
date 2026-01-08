@@ -9,12 +9,13 @@ import { useState } from "react";
 import { FarmsListContainer } from "@/components/dashboard/FarmsListContainer";
 import { FarmDetailsContainer } from "@/components/dashboard/FarmDetailsContainer";
 import type { Farm } from "@/models/farm.model";
+import { createRoute, type AnyRoute } from "@tanstack/react-router";
 
 const farmStatus = generateFarmStatus();
 
 type DASHBOARD_VIEW = "overview" | "farms" | "farm-details";
 
-export default function DashboardIndex() {
+function DashboardIndex() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentView, setCurrentView] = useState<DASHBOARD_VIEW>("overview");
   const [selectedFarm, setSelectedFarm] = useState<Farm | null>(null);
@@ -92,7 +93,7 @@ export default function DashboardIndex() {
                   Individual farm status
                 </h1>
               </header>
-              <div className="grid w-full grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
                 {farmStatus.map((entry) => (
                   <FarmStatusCard
                     key={entry.id}
@@ -128,3 +129,13 @@ export default function DashboardIndex() {
     </>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: "dashboard",
+    component: DashboardIndex,
+    getParentRoute: () => parentRoute,
+    staticData: {
+      title: "Dashboard",
+    },
+  });

@@ -14,28 +14,28 @@ import "./styles.css";
 import reportWebVitals from "./reportWebVitals.ts";
 
 import App from "./App.tsx";
-import AuthLayout from "./routes/auth/AuthLayout.tsx";
-import GetStartedCard from "./routes/auth/GetStartedCard.tsx";
-import SelectCountryCard from "./routes/auth/SelectCountryCard.tsx";
-import FarmTypeCard from "./routes/auth/FarmTypeCard.tsx";
-import Signin from "./routes/auth/Signin.tsx";
-import ForgotPassword from "./routes/auth/ForgotPassword.tsx";
-import OtpVerification from "./routes/auth/OtpVerification.tsx";
-import ResetPassword from "./routes/auth/ResetPassword.tsx";
-import Signup from "./routes/auth/Signup.tsx";
-import Organisation from "./routes/auth/Organisation.tsx";
+import AuthLayoutRoute from "./routes/auth/AuthLayout.tsx";
+import GetStartedRoute from "./routes/auth/GetStartedCard.tsx";
+import SelectCountryRoute from "./routes/auth/SelectCountryCard.tsx";
+import FarmTypeRoute from "./routes/auth/FarmTypeCard.tsx";
+import SigninRoute from "./routes/auth/Signin.tsx";
+import ForgotPasswordRoute from "./routes/auth/ForgotPassword.tsx";
+import OtpVerificationRoute from "./routes/auth/OtpVerification.tsx";
+import ResetPasswordRoute from "./routes/auth/ResetPassword.tsx";
+import SignupRoute from "./routes/auth/Signup.tsx";
+import OrganisationRoute from "./routes/auth/Organisation.tsx";
 import Splash from "./routes/Splash.tsx";
-import DashboardLayout from "./routes/dashboard/DashboardLayout.tsx";
-import DashboardIndex from "./routes/dashboard/DashboardIndex.tsx";
-import soilTesting from "./routes/dashboard/SoilTesting.tsx";
-import cropInformation from "./routes/dashboard/CropInformation.tsx";
-import cropMonitoring from "./routes/dashboard/CropMonitoring.tsx";
-import CreatePassword from "./routes/auth/CreatePassword.tsx";
-import roles from "./routes/dashboard/Roles.tsx";
-import users from "./routes/dashboard/Users.tsx";
+import DashboardLayoutRoute from "./routes/dashboard/DashboardLayout.tsx";
+import DashboardIndexRoute from "./routes/dashboard/DashboardIndex.tsx";
+import SoilTestingRoute from "./routes/dashboard/SoilTesting.tsx";
+import CropInformationRoute from "./routes/dashboard/CropInformation.tsx";
+import CropMonitoringRoute from "./routes/dashboard/CropMonitoring.tsx";
+import CreatePasswordRoute from "./routes/auth/CreatePassword.tsx";
+import RolesRoute from "./routes/dashboard/Roles.tsx";
+import UsersRoute from "./routes/dashboard/Users.tsx";
 
 const rootRoute = createRootRoute({
-  component: App
+  component: App,
 });
 
 const splashRoute = createRoute({
@@ -50,85 +50,85 @@ const indexRoute = createRoute({
   loader: () => {
     throw redirect({
       to: "/get-started",
-      replace: true
-    })
-  }
+      replace: true,
+    });
+  },
 });
 
-const authRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  id: "auth",
-  component: AuthLayout,
-});
+// const authRoute = createRoute({
+//   getParentRoute: () => rootRoute,
+//   id: "auth",
+//   component: AuthLayout,
+// });
 
-const getStartedRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "get-started",
-  component: GetStartedCard,
-});
+// const getStartedRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "get-started",
+//   component: GetStartedCard,
+// });
 
-const selectCountryRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "select-country",
-  component: SelectCountryCard,
-});
+// const selectCountryRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "select-country",
+//   component: SelectCountryCard,
+// });
 
-const farmTypeRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "farm-type",
-  component: FarmTypeCard,
-});
+// const farmTypeRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "farm-type",
+//   component: FarmTypeCard,
+// });
 
-const signinRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "signin",
-  component: Signin,
-});
+// const signinRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "signin",
+//   component: Signin,
+// });
 
-const createPasswordRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "create-password",
-  component: CreatePassword,
-});
+// const createPasswordRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "create-password",
+//   component: CreatePassword,
+// });
 
-const forgotPasswordRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "forgot-password",
-  component: ForgotPassword,
-});
+// const forgotPasswordRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "forgot-password",
+//   component: ForgotPassword,
+// });
 
-const otpVerificationRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "otp-verification",
-  component: OtpVerification,
-});
+// const otpVerificationRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "otp-verification",
+//   component: OtpVerification,
+// });
 
-const resetPasswordRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "reset-password",
-  component: ResetPassword,
-});
+// const resetPasswordRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "reset-password",
+//   component: ResetPassword,
+// });
 
-const signupRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "signup",
-  component: Signup,
-});
+// const signupRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "signup",
+//   component: Signup,
+// });
 
-const organisationRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "organisation",
-  component: Organisation,
-});
+// const organisationRoute = createRoute({
+//   getParentRoute: () => authRoute,
+//   path: "organisation",
+//   component: Organisation,
+// });
 
-const dashboardRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "dashboard",
-  component: DashboardLayout,
-});
+// const dashboardRoute = createRoute({
+//   getParentRoute: () => rootRoute,
+//   path: "dashboard",
+//   component: DashboardLayout,
+// });
 
-const dashboardIndexRoute = createRoute({
-  getParentRoute: () => dashboardRoute,
+const dashboardHomeRoute = createRoute({
+  getParentRoute: () => dashboardLayoutRoute,
   path: "/",
   staticData: {
     title: "Dashboard",
@@ -136,88 +136,91 @@ const dashboardIndexRoute = createRoute({
   loader: () => {
     throw redirect({
       to: "/dashboard/dashboard",
-      replace: true
-    })
-  }
-});
-
-const dashboardHomeRoute = createRoute({
-  getParentRoute: () => dashboardRoute,
-  path: "dashboard",
-  component: DashboardIndex,
-  staticData: {
-    title: "Dashboard",
+      replace: true,
+    });
   },
 });
 
-const soilTestingRoute = createRoute({
-  getParentRoute: () => dashboardRoute,
-  path: "soil-testing",
-  component: soilTesting,
-  staticData: {
-    title: "Soil Testing",
-  },
-});
+// const dashboardHomeRoute = createRoute({
+//   getParentRoute: () => dashboardLayoutRoute,
+//   path: "dashboard",
+//   component: DashboardIndex,
+//   staticData: {
+//     title: "Dashboard",
+//   },
+// });
 
-const cropInformationRoute = createRoute({
-  getParentRoute: () => dashboardRoute,
-  path: "crop-information",
-  component: cropInformation,
-  staticData: {
-    title: "Crop Information",
-  },
-});
+// const soilTestingRoute = createRoute({
+//   getParentRoute: () => dashboardRoute,
+//   path: "soil-testing",
+//   component: soilTesting,
+//   staticData: {
+//     title: "Soil Testing",
+//   },
+// });
 
-const cropMonitoringRoute = createRoute({
-  getParentRoute: () => dashboardRoute,
-  path: "crop-monitoring",
-  component: cropMonitoring,
-  staticData: {
-    title: "Crop Monitoring",
-  },
-});
+// const cropInformationRoute = createRoute({
+//   getParentRoute: () => dashboardRoute,
+//   path: "crop-information",
+//   component: cropInformation,
+//   staticData: {
+//     title: "Crop Information",
+//   },
+// });
 
-const rolesRoute = createRoute({
-  getParentRoute: () => dashboardRoute,
-  path: "roles",
-  component: roles,
-  staticData: {
-    title: "Roles & Permission",
-  },
-});
+// const cropMonitoringRoute = createRoute({
+//   getParentRoute: () => dashboardRoute,
+//   path: "crop-monitoring",
+//   component: cropMonitoring,
+//   staticData: {
+//     title: "Crop Monitoring",
+//   },
+// });
 
-const usersRoute = createRoute({
-  getParentRoute: () => dashboardRoute,
-  path: "users",
-  component: users,
-  staticData: {
-    title: "User Management",
-  },
-});
+// const rolesRoute = createRoute({
+//   getParentRoute: () => dashboardRoute,
+//   path: "roles",
+//   component: roles,
+//   staticData: {
+//     title: "Roles & Permission",
+//   },
+// });
+
+// const usersRoute = createRoute({
+//   getParentRoute: () => dashboardRoute,
+//   path: "users",
+//   component: users,
+//   staticData: {
+//     title: "User Management",
+//   },
+// });
+
+const authRoute = AuthLayoutRoute(rootRoute);
+const dashboardLayoutRoute = DashboardLayoutRoute(rootRoute);
 
 const routeTree = rootRoute.addChildren([
   splashRoute,
   indexRoute,
   authRoute.addChildren([
-    getStartedRoute,
-    selectCountryRoute,
-    farmTypeRoute,
-    signinRoute,
-    createPasswordRoute,
-    forgotPasswordRoute,
-    otpVerificationRoute,
-    resetPasswordRoute,
-    signupRoute,
-    organisationRoute,
+    GetStartedRoute(authRoute),
+    SelectCountryRoute(authRoute),
+    FarmTypeRoute(authRoute),
+    SigninRoute(authRoute),
+    CreatePasswordRoute(authRoute),
+    ForgotPasswordRoute(authRoute),
+    OtpVerificationRoute(authRoute),
+    ResetPasswordRoute(authRoute),
+    SignupRoute(authRoute),
+    OrganisationRoute(authRoute),
   ]),
-  dashboardRoute.addChildren([
-    dashboardIndexRoute,
+  dashboardLayoutRoute.addChildren([
     dashboardHomeRoute,
-    soilTestingRoute,
-    cropInformationRoute,
-    cropMonitoringRoute,
-    rolesRoute,
-    usersRoute,
+    DashboardIndexRoute(dashboardLayoutRoute),
+    SoilTestingRoute(dashboardLayoutRoute),
+    CropInformationRoute(dashboardLayoutRoute),
+    CropMonitoringRoute(dashboardLayoutRoute),
+    RolesRoute(dashboardLayoutRoute),
+    UsersRoute(dashboardLayoutRoute),
   ]),
 ]);
 

@@ -1,6 +1,6 @@
 import { FarmTypeCheckbox } from "@/components/auth/FarmTypeCheckbox";
 import { Button } from "@/components/Button";
-import { Link } from "@tanstack/react-router";
+import { createRoute, Link, type AnyRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
 interface FarmerType {
@@ -46,7 +46,7 @@ const farmerTypes: FarmerType[] = [
   },
 ];
 
-export default function FarmTypeCard() {
+function FarmTypeCard() {
   const [selectedId, setSelectedId] = useState<string | null>(farmerTypes[0].id);
 
   const handleSelect = (id: string) => {
@@ -79,3 +79,10 @@ export default function FarmTypeCard() {
     </div>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: 'farm-type',
+    component: FarmTypeCard,
+    getParentRoute: () => parentRoute,
+  })

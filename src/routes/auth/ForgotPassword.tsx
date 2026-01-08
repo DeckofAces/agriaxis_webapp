@@ -1,51 +1,57 @@
 import { Button } from "@/components/Button";
 import { allCountries, type Country } from "@/data/countries";
+import { createRoute, type AnyRoute } from "@tanstack/react-router";
 import { Search, X } from "lucide-react";
 import { useRef, useState, useMemo, useEffect } from "react";
 
-type LoginType = 'phone number' | 'email';
+type LoginType = "phone number" | "email";
 
 const flagStyle = {
-  fontSize: '1.25rem',
+  fontSize: "1.25rem",
   lineHeight: 1,
-  marginLeft: '0.5rem',
+  marginLeft: "0.5rem",
 };
 
-export default function ForgotPassword() {
-  const [loginType, setLoginType] = useState<LoginType>('phone number');
+function ForgotPassword() {
+  const [loginType, setLoginType] = useState<LoginType>("phone number");
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [selectedCountry, setSelectedCountry] = useState(
-    allCountries.find(c => c.code === '234') || allCountries[0]
+    allCountries.find((c) => c.code === "234") || allCountries[0],
   );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const filteredCountries = useMemo<Country[]>(() => {
     const lowerCaseSearch = searchTerm.toLowerCase().trim();
     if (!lowerCaseSearch) return allCountries;
 
-    return allCountries.filter(country => {
-      return country.name.toLowerCase().includes(lowerCaseSearch) ||
-        country.code.includes(lowerCaseSearch);
+    return allCountries.filter((country) => {
+      return (
+        country.name.toLowerCase().includes(lowerCaseSearch) ||
+        country.code.includes(lowerCaseSearch)
+      );
     });
   }, [searchTerm]);
 
   const handleSelectCountry = (country: Country) => {
     setSelectedCountry(country);
     setIsDropdownOpen(false);
-    setSearchTerm('');
+    setSearchTerm("");
   };
-  const [phoneError, setPhoneError] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   // setPhoneError('Phone number not recognized');
   // setEmailError('Email not recognized');
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
-        setSearchTerm('');
+        setSearchTerm("");
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -55,76 +61,97 @@ export default function ForgotPassword() {
   }, [dropdownRef]);
 
   return (
-    <div className="max-w-5/12 min-w-135 rounded-3xl bg-white p-16 flex flex-col gap-10">
+    <div className="flex max-w-5/12 min-w-135 flex-col gap-10 rounded-3xl bg-white p-16">
       <header className="space-y-2">
-        <h5 className="font-neue text-2xl font-semibold text-[#130B30]">Forgot Password</h5>
-        <h6 className="text-[#423C59]">Enter your registered {loginType} to reset your password</h6>
+        <h5 className="font-neue text-2xl font-semibold text-[#130B30]">
+          Forgot Password
+        </h5>
+        <h6 className="text-[#423C59]">
+          Enter your registered {loginType} to reset your password
+        </h6>
       </header>
       <section>
-        {loginType === 'phone number' ?
+        {loginType === "phone number" ? (
           <div>
-            <label className="mb-0.5 text-sm text-[#130B30]">Phone number</label>
+            <label className="mb-0.5 text-sm text-[#130B30]">
+              Phone number
+            </label>
             <div className="flex items-center gap-0.5">
               <div
                 ref={dropdownRef}
-                className="relative z-20 shrink-0 cursor-pointer transition duration-150 ease-in-out bg-[#F3F6F8] py-4 px-2 rounded-lg"
+                className="relative z-20 shrink-0 cursor-pointer rounded-lg bg-[#F3F6F8] px-2 py-4 transition duration-150 ease-in-out"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 <div className="flex items-center pr-2 pl-1.5">
-                  <span className="text-sm  text-[#130B30]">
+                  <span className="text-sm text-[#130B30]">
                     +{selectedCountry.code}
                   </span>
                   <span style={flagStyle}>{selectedCountry.flag}</span>
                 </div>
 
                 {isDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden">
-                    <div className="p-3 border-b border-gray-100 flex items-center">
-                      <Search className="w-4 h-4 text-gray-400 mr-2 shrink-0" />
+                  <div className="absolute top-full left-0 mt-2 w-72 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-2xl">
+                    <div className="flex items-center border-b border-gray-100 p-3">
+                      <Search className="mr-2 h-4 w-4 shrink-0 text-gray-400" />
                       <input
                         type="text"
                         placeholder="Search country or code"
-                        className="w-full text-sm bg-transparent border-none focus:outline-none placeholder-gray-500 text-gray-700"
+                        className="w-full border-none bg-transparent text-sm text-gray-700 placeholder-gray-500 focus:outline-none"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         onClick={(e) => e.stopPropagation()}
                       />
                       {searchTerm && (
-                        <X className="w-4 h-4 text-gray-400 cursor-pointer hover:text-gray-600 ml-2" onClick={() => setSearchTerm('')} />
+                        <X
+                          className="ml-2 h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600"
+                          onClick={() => setSearchTerm("")}
+                        />
                       )}
                     </div>
 
-                    <ul className="max-h-64 overflow-y-auto custom-scrollbar">
+                    <ul className="custom-scrollbar max-h-64 overflow-y-auto">
                       {filteredCountries.length > 0 ? (
                         filteredCountries.map((country) => (
                           <li
                             key={`${country.code}-${country.name}`}
-                            className="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-100 transition duration-150 ease-in-out border-b border-gray-100 last:border-b-0"
+                            className="flex cursor-pointer items-center justify-between border-b border-gray-100 p-3 transition duration-150 ease-in-out last:border-b-0 hover:bg-gray-100"
                             onClick={() => handleSelectCountry(country)}
                           >
                             <div className="flex items-center">
-                              <span style={flagStyle} className="mr-2 text-sm">{country.flag}</span>
-                              <span className="text-[#130B30] text-sm font-medium">{country.name}</span>
+                              <span style={flagStyle} className="mr-2 text-sm">
+                                {country.flag}
+                              </span>
+                              <span className="text-sm font-medium text-[#130B30]">
+                                {country.name}
+                              </span>
                             </div>
-                            <span className="text-[#423C59] text-xs font-mono">+{country.code}</span>
+                            <span className="font-mono text-xs text-[#423C59]">
+                              +{country.code}
+                            </span>
                           </li>
                         ))
                       ) : (
-                        <li className="p-3 text-center text-[#423C59] text-sm">No results found.</li>
+                        <li className="p-3 text-center text-sm text-[#423C59]">
+                          No results found.
+                        </li>
                       )}
                     </ul>
                   </div>
                 )}
               </div>
-              <div className={`flex items-center justify-between rounded-lg p-4 w-full border-2 transition-colors 
-                  ${phoneError ? 'border-red-500 bg-[#E52B670D]' : 'border-transparent bg-[#F3F6F8]'
-                }`}>
+              <div
+                className={`flex w-full items-center justify-between rounded-lg border-2 p-4 transition-colors ${
+                  phoneError
+                    ? "border-red-500 bg-[#E52B670D]"
+                    : "border-transparent bg-[#F3F6F8]"
+                }`}
+              >
                 <input
                   type="tel"
-                  className="w-11/12 text-sm placeholder:text-[#423C59] placeholder:opacity-70 text-[#423C59] outline-0 border-none"
+                  className="w-11/12 border-none text-sm text-[#423C59] outline-0 placeholder:text-[#423C59] placeholder:opacity-70"
                   placeholder="081 **** 572"
                   onChange={() => {
-                    if (phoneError) setPhoneError('');
+                    if (phoneError) setPhoneError("");
                   }}
                 />
               </div>
@@ -133,17 +160,22 @@ export default function ForgotPassword() {
               <p className="mt-1 text-sm text-red-600">{phoneError}</p>
             )}
           </div>
-          :
+        ) : (
           <div>
             <label className="mb-0.5 text-sm text-[#130B30]">Email</label>
-            <div className={`rounded-lg p-4 border-2 transition-colors ${emailError ? 'border-red-500 bg-[#E52B670D]' : 'border-transparent bg-[#F3F6F8]'
-              }`}>
+            <div
+              className={`rounded-lg border-2 p-4 transition-colors ${
+                emailError
+                  ? "border-red-500 bg-[#E52B670D]"
+                  : "border-transparent bg-[#F3F6F8]"
+              }`}
+            >
               <input
                 type="email"
-                className="w-11/12 text-sm placeholder:text-[#423C59] placeholder:opacity-70 text-[#423C59] outline-0 border-none"
+                className="w-11/12 border-none text-sm text-[#423C59] outline-0 placeholder:text-[#423C59] placeholder:opacity-70"
                 placeholder="user@example.com"
                 onChange={() => {
-                  if (emailError) setEmailError('');
+                  if (emailError) setEmailError("");
                 }}
               />
             </div>
@@ -151,15 +183,28 @@ export default function ForgotPassword() {
               <p className="mt-1 text-sm text-red-600">{emailError}</p>
             )}
           </div>
-        }
+        )}
       </section>
       <section className="mb-2 space-y-4">
         <Button variant="primary">Continue</Button>
-        <Button variant="link" onClick={() => setLoginType(loginType === 'phone number' ? 'email' : 'phone number')}>
-          use my {loginType === 'phone number' ? 'email' : 'phone number'}
+        <Button
+          variant="link"
+          onClick={() =>
+            setLoginType(
+              loginType === "phone number" ? "email" : "phone number",
+            )
+          }
+        >
+          use my {loginType === "phone number" ? "email" : "phone number"}
         </Button>
       </section>
     </div>
-  )
+  );
 }
 
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: "forgot-password",
+    component: ForgotPassword,
+    getParentRoute: () => parentRoute,
+  });

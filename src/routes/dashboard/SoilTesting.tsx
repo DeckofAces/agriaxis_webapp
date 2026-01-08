@@ -8,8 +8,9 @@ import testingIconGrey from "/assets/icons/testing-grey.svg";
 import testingIcon from "/assets/icons/testing.svg";
 import { useState } from "react";
 import { RequestSoilTestSheetsContainer } from "@/components/soil-testing/RequestSoilTestSheetsContainer";
+import { createRoute, type AnyRoute } from "@tanstack/react-router";
 
-export default function SoilTesting() {
+function SoilTesting() {
   const [showRequestTest, setShowRequestTest] = useState(false);
   const IS_EMPTY = false;
 
@@ -99,3 +100,13 @@ export default function SoilTesting() {
     </>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: "soil-testing",
+    component: SoilTesting,
+    getParentRoute: () => parentRoute,
+    staticData: {
+      title: "Soil Testing",
+    },
+  });

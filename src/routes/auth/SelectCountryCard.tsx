@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/popover";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Link } from "@tanstack/react-router";
+import { createRoute, Link, type AnyRoute } from "@tanstack/react-router";
 
 const countries = [
   {
@@ -41,7 +41,7 @@ const countries = [
   },
 ];
 
-export default function SelectCountryCard() {
+function SelectCountryCard() {
   const [countryListOpen, setcountryListOpen] = useState(false);
   const [countryValue, setCountryValue] = useState("");
   const selectedCountry = countries.find(
@@ -129,3 +129,10 @@ export default function SelectCountryCard() {
     </div>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: 'select-country',
+    component: SelectCountryCard,
+    getParentRoute: () => parentRoute,
+  })

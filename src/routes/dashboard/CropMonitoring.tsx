@@ -8,6 +8,7 @@ import testingIcon from "/assets/icons/testing.svg";
 import { useState } from "react";
 import { CropMonitoringServicePage } from "@/components/crop-monitoring/CropMonitoringServicePage";
 import { RequestCropInformationSheetsContainer } from "@/components/crop-monitoring/RequestCropInformationSheetsContainer";
+import { createRoute, type AnyRoute } from "@tanstack/react-router";
 
 const SERVICES = [
   {
@@ -24,7 +25,7 @@ const SERVICES = [
 
 type DASHBOARD_VIEW = "overview" | "service";
 
-export default function CropMonitoring() {
+function CropMonitoring() {
   const [currentView, setCurrentView] = useState<DASHBOARD_VIEW>("overview");
   const [selectedServiceTitle, setSelectedServiceTitle] = useState("");
   const [showRequestSheet, setShowRequestSheet] = useState(false);
@@ -48,7 +49,7 @@ export default function CropMonitoring() {
                 early before they damage your crops health.
               </h2>
             </header>
-            <div className="grid lg:grid-cols-3 gap-3">
+            <div className="grid gap-3 lg:grid-cols-3">
               <StatCard
                 icon={
                   <div className="grid size-9.5 place-items-center rounded-[0.375rem] border border-[#0A814A] bg-[#E7F2ED]">
@@ -124,3 +125,13 @@ export default function CropMonitoring() {
     </>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: "crop-monitoring",
+    component: CropMonitoring,
+    getParentRoute: () => parentRoute,
+    staticData: {
+      title: "Crop Monitoring",
+    },
+  });

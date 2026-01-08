@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { generateRoles } from "@/data/role.data";
 import type { Role } from "@/models/role.model";
+import { createRoute, type AnyRoute } from "@tanstack/react-router";
 import type { ColumnDef } from "@tanstack/react-table";
 import { MoreVertical } from "lucide-react";
 import { Activity, useMemo, useState } from "react";
 
-export default function Roles() {
+function Roles() {
   const roleColumns: ColumnDef<Role>[] = [
     {
       accessorKey: "title",
@@ -81,3 +82,13 @@ export default function Roles() {
     </>
   );
 }
+
+export default (parentRoute: AnyRoute) =>
+  createRoute({
+    path: "roles",
+    component: Roles,
+    getParentRoute: () => parentRoute,
+    staticData: {
+      title: "Roles & Permissions",
+    },
+  });
