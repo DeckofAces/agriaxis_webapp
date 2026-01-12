@@ -21,6 +21,7 @@ interface DataTableProps<T> {
   hideHeader?: boolean;
 }
 
+//TODO: Define proper filter fn
 export function DataTable<T>({
   title = "Table",
   data,
@@ -31,6 +32,12 @@ export function DataTable<T>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    filterFns: {
+      fuzzy: (row, columnId, value) => {
+        const cellValue: any = row.getValue(columnId);
+        return cellValue.toLowerCase().includes(value.toLowerCase());
+      },
+    },
   });
 
   return (
