@@ -4,7 +4,7 @@ import { Button } from "@/components/Button";
 export const AddNewUserSheet: React.FC<{
   onClose: () => void;
   isOpen?: boolean;
-}> = ({ onClose, isOpen }) => {
+}> = ({ onClose }) => {
 //   if (!isOpen) return null;
   return (
     <section

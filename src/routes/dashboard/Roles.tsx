@@ -58,7 +58,7 @@ function Roles() {
     },
   ];
   const columns = useMemo(() => roleColumns, []);
-  const [data, setData] = useState(() => generateRoles(5));
+  const [data] = useState(() => generateRoles(5));
   const [showAddRoleForm, setShowAddRoleForm] = useState(false);
 
   return (

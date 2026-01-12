@@ -30,7 +30,7 @@ export const ManualMeasurementCard: React.FC<{
   isOpen?: boolean;
   onClose: () => void;
   onConfirm: () => void;
-}> = ({ isOpen, onClose, onConfirm }) => {
+}> = ({ onClose, onConfirm }) => {
   //   if (!isOpen) return null;
 
   return (

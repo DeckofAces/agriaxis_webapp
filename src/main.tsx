@@ -24,7 +24,6 @@ import OtpVerificationRoute from "./routes/auth/OtpVerification.tsx";
 import ResetPasswordRoute from "./routes/auth/ResetPassword.tsx";
 import SignupRoute from "./routes/auth/Signup.tsx";
 import OrganisationRoute from "./routes/auth/Organisation.tsx";
-import Splash from "./routes/Splash.tsx";
 import DashboardLayoutRoute from "./routes/dashboard/DashboardLayout.tsx";
 import DashboardIndexRoute from "./routes/dashboard/DashboardIndex.tsx";
 import SoilTestingRoute from "./routes/dashboard/SoilTesting.tsx";
@@ -45,12 +44,6 @@ const rootRoute = createRootRoute({
     ],
   }),
   component: App,
-});
-
-const splashRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/splash",
-  component: Splash,
 });
 
 const indexRoute = createRoute({
@@ -82,7 +75,6 @@ const authRoute = AuthLayoutRoute(rootRoute);
 const dashboardLayoutRoute = DashboardLayoutRoute(rootRoute);
 
 const routeTree = rootRoute.addChildren([
-  splashRoute,
   indexRoute,
   authRoute.addChildren([
     GetStartedRoute(authRoute),

@@ -1,18 +1,18 @@
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/Button";
-import { useState } from "react";
+// import { useState } from "react";
 
 export const FarmSizeForMeasurementCard: React.FC<{
   isOpen?: boolean;
   onClose: () => void;
   onConfirm: () => void;
-}> = ({ isOpen, onClose, onConfirm }) => {
+}> = ({ onClose, onConfirm }) => {
 //   if (!isOpen) return null;
 
-  const [farmSize, setFarmSize] = useState(0);
-  const [farmSizeUnit, setFarmSizeUnit] = useState("");
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [hectares, setHectares] = useState(0);
+  // const [farmSize, setFarmSize] = useState(0);
+  // const [farmSizeUnit, setFarmSizeUnit] = useState("");
+  // const [totalPrice, setTotalPrice] = useState(0);
+  // const [hectares, setHectares] = useState(0);
 
   return (
     <section className="size-full">

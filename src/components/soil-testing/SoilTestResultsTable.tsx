@@ -10,7 +10,7 @@ import { defaultData } from "@/data/soil-testing-results";
 import type { Transaction } from "@/models/soil-testing-model";
 import { type ColumnDef } from "@tanstack/react-table";
 import { MoreVertical } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 const StatusBadge: React.FC<{ status: Transaction["status"] }> = ({
   status,
@@ -76,7 +76,8 @@ const SoilTestingResultsTable = () => {
   ];
 
   const columns = useMemo(() => soilColumns, []);
-  const [data, setData] = useState(() => defaultData);
+  // const [data, setData] = useState(() => defaultData);
+  const data = useMemo(() => defaultData, []);
 
   return (
     <>

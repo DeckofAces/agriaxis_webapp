@@ -66,13 +66,8 @@ function Users() {
     },
   ];
   const columns = useMemo(() => userColumns, []);
-  const [data, setData] = useState(() => generateUsers(5));
+  const [data] = useState(() => generateUsers(5));
   const [showAddUserForm, setShowAddUserForm] = useState(false);
-
-  const handleClose = () => {
-    console.log("close");
-    setShowAddUserForm(false);
-  };
 
   return (
     <>
