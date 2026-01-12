@@ -67,7 +67,7 @@ function Signup() {
           Create account
         </h5>
         <h6 className="text-[#423C59]">
-          Let's have your contact person details
+          Let's have your details
         </h6>
       </header>
       <section className="space-y-6">
