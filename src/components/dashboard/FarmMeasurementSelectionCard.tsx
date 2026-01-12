@@ -6,8 +6,7 @@ export const FarmMeasurementSelectionCard: React.FC<{
   onClose: () => void;
   onConfirm: (selection: "existing" | "new") => void;
   serviceType?: string;
-}> = ({ isOpen, onClose, onConfirm, serviceType }) => {
-  //   if (!isOpen) return null;
+}> = ({ onClose, onConfirm, serviceType }) => {
 
   return (
     <section className="size-full">

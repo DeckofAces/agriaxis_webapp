@@ -57,10 +57,9 @@ const FarmDetailsCard: React.FC<{
   onClose: () => void;
   onConfirm: () => void;
   requestServiceType?: string;
-}> = ({ isOpen, onClose, onConfirm, requestServiceType }) => {
+}> = ({ onClose, onConfirm, requestServiceType }) => {
   const [cropType, setCropType] = useState("cocoa");
   const [farm, setFarm] = useState<string | null>(null);
-  // if (!isOpen) return null;
 
   return (
     <section className="size-full overflow-y-auto">

@@ -6,9 +6,8 @@ export const PreviousLandMeasurementCard: React.FC<{
   isOpen?: boolean;
   onClose: () => void;
   onConfirm: () => void;
-}> = ({ isOpen, onClose, onConfirm }) => {
-  //   if (!isOpen) return null;
-  const [coordinates, setCoordinates] = useState<
+}> = ({ onClose, onConfirm }) => {
+  const [coordinates] = useState<
     { label: string; value1: string; value2: string }[]
   >([
     { label: "point 1", value1: "6.5244°N", value2: "3.3792°E" },

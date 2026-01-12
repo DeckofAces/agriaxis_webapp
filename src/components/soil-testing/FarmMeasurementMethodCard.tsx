@@ -6,8 +6,7 @@ export const FarmMeasurementMethodCard: React.FC<{
   isOpen?: boolean;
   onClose: () => void;
   onConfirm: (selection: "google" | "manual") => void;
-}> = ({ isOpen, onClose, onConfirm }) => {
-  //   if (!isOpen) return null;
+}> = ({ onClose, onConfirm }) => {
   const [selection, setSelection] = useState<"google" | "manual">("google");
 
   return (

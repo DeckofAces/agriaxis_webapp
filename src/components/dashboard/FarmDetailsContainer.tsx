@@ -71,7 +71,7 @@ export const FarmDetailsContainer: React.FC<{
   ];
 
   const columns = useMemo(() => testColumns, []);
-  const [data, setData] = useState(() => farm.tests);
+  const [data] = useState(() => farm.tests);
   const [viewSoilTestResult, setViewSoilTestResult] = useState(false);
   const [showRenameResultModal, setShowRenameResultModal] = useState(false);
 

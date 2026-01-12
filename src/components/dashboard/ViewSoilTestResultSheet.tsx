@@ -6,7 +6,7 @@ export const ViewSoilTestResultSheet: React.FC<{
   onClose: () => void;
   isOpen: boolean;
   test: FarmTest;
-}> = ({ onClose, isOpen, test }) => {
+}> = ({ onClose, test }) => {
   return (
     <section
       className="fixed inset-0 z-40 bg-black/70 p-4 transition-opacity"

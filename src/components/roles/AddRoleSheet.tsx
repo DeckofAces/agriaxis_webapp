@@ -27,7 +27,6 @@ interface AddRoleSheetProps {
 }
 
 export const AddRoleSheet: React.FC<AddRoleSheetProps> = ({
-  isOpen,
   onClose,
 }) => {
   const [roleTitle, setRoleTitle] = useState("");

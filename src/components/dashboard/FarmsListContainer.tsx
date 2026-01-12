@@ -81,7 +81,7 @@ export const FarmsListContainer: React.FC<{
   ];
 
   const columns = useMemo(() => farmColumns, []);
-  const [data, setData] = useState(() => farms);
+  const [data] = useState(() => farms);
 
   return (
     <main className="rounded-[1.25rem] bg-white p-6 pb-9">
