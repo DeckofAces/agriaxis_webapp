@@ -27,18 +27,6 @@ const countries = [
     value: "ghana",
     label: "Ghana",
   },
-  {
-    value: "united-states",
-    label: "United States",
-  },
-  {
-    value: "south-korea",
-    label: "South Korea",
-  },
-  {
-    value: "canada",
-    label: "Canada",
-  },
 ];
 
 function SelectCountryCard() {
