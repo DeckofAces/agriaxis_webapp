@@ -1,6 +1,7 @@
 import { FarmTypeCheckbox } from "@/components/auth/FarmTypeCheckbox";
 import { Button } from "@/components/Button";
-import { createRoute, Link, type AnyRoute } from "@tanstack/react-router";
+import { useRegistrationStore } from "@/stores/useRegistrationStore";
+import { createRoute, Link, redirect, type AnyRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
 interface FarmerType {
@@ -33,35 +34,39 @@ const farmerTypes: FarmerType[] = [
     id: 'finance',
     title: 'Financial Institutions',
     subtitle: 'I manage a financial institution',
+    imageSrc: '/assets/images/bank.jpg',
   },
   {
     id: 'project',
     title: 'Project Sponsors',
     subtitle: 'I sponsor various projects',
+    imageSrc: '/assets/images/sponsor.jpg',
   },
   {
     id: 'others',
     title: 'Others',
     subtitle: 'My category is unlisted',
+    imageSrc: '/assets/images/question.jpg',
   },
 ];
 
 function FarmTypeCard() {
-  const [selectedId, setSelectedId] = useState<string | null>(farmerTypes[0].id);
-
+  const [selectedId, setSelectedId] = useState<string | null>();
+  const formData = useRegistrationStore((state) => state.updateFormData);
   const handleSelect = (id: string) => {
     setSelectedId(prevId => (prevId === id ? null : id));
+    formData({ farm_type: id });
   };
 
   return (
-    <div className="flex max-w-5/12 min-w-135 flex-col gap-10 rounded-3xl bg-white p-16">
+    <div className="flex max-w-5/12 min-w-135 flex-col gap-10 rounded-3xl bg-white p-10 h-[82vh]">
       <header className="space-y-2">
         <h5 className="font-neue text-2xl font-semibold text-[#130B30]">
           Your Farm Type
         </h5>
         <h6 className="text-[#423C59]">Let us know your farm size to serve you better</h6>
       </header>
-      <section className="space-y-4">
+      <section className="space-y-4 h-[65vh] overflow-y-auto">
         {farmerTypes.map((farmer) => (
           <FarmTypeCheckbox
             key={farmer.id}
@@ -74,7 +79,7 @@ function FarmTypeCard() {
         ))}
       </section>
       <Link to="/signup" className="block">
-        <Button variant="primary">Continue</Button>
+        <Button variant="primary" disabled={!selectedId}>Continue</Button>
       </Link>
     </div>
   );
@@ -85,4 +90,13 @@ export default (parentRoute: AnyRoute) =>
     path: 'farm-type',
     component: FarmTypeCard,
     getParentRoute: () => parentRoute,
+    beforeLoad: () => {
+      const isValid = useRegistrationStore.getState().validateStep(['country'])
+      if (!isValid) {
+        throw redirect({
+          to: "/select-country",
+          replace: true,
+        })
+      }
+    }
   })

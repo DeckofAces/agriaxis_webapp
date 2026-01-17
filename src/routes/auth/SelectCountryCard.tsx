@@ -17,6 +17,7 @@ import {
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createRoute, Link, type AnyRoute } from "@tanstack/react-router";
+import { useRegistrationStore } from "@/stores/useRegistrationStore";
 
 const countries = [
   {
@@ -35,6 +36,12 @@ function SelectCountryCard() {
   const selectedCountry = countries.find(
     (country) => country.value === countryValue,
   );
+  const formData = useRegistrationStore((state) => state.updateFormData);
+  const selectCountry = (country: string) => {
+    setCountryValue(country);
+    formData({ country: country });
+  };
+  const isValid = useRegistrationStore.getState().validateStep(['country'])
 
   return (
     <div className="flex max-w-5/12 min-w-135 flex-col gap-18.25 rounded-3xl bg-white p-16">
@@ -87,9 +94,7 @@ function SelectCountryCard() {
                     key={country.value}
                     value={country.value}
                     onSelect={(currentValue) => {
-                      setCountryValue(
-                        currentValue === countryValue ? "" : currentValue,
-                      );
+                      selectCountry(currentValue);
                       setcountryListOpen(false);
                     }}
                   >
@@ -111,7 +116,7 @@ function SelectCountryCard() {
       </Popover>
       <div>
         <Link to="/farm-type" className="block">
-          <Button variant="primary">Continue</Button>
+          <Button variant="primary" disabled={!isValid}>Continue</Button>
         </Link>
       </div>
     </div>
@@ -120,7 +125,7 @@ function SelectCountryCard() {
 
 export default (parentRoute: AnyRoute) =>
   createRoute({
-    path: 'select-country',
+    path: "select-country",
     component: SelectCountryCard,
     getParentRoute: () => parentRoute,
-  })
+  });
