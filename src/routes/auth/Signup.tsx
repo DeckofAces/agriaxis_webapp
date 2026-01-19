@@ -82,6 +82,15 @@ function Signup() {
     });
   };
 
+  const handleSelectLoginType = (loginType: LoginType) => {
+    setLoginType(loginType);
+    if (loginType === 'phone number') {
+      updateFormData({ phone: '' })
+    } else {
+      updateFormData({ email: '' })
+    }
+  };
+
   const handleSelectCountry = (country: Country) => {
     setSelectedCountry(country);
     setIsDropdownOpen(false);
@@ -235,7 +244,7 @@ function Signup() {
                 )}
                 <p
                   className="ml-auto w-fit cursor-pointer text-sm text-[#0A814A]"
-                  onClick={() => setLoginType("email")}
+                  onClick={() => handleSelectLoginType("email")}
                 >
                   Use email address
                 </p>
@@ -265,7 +274,7 @@ function Signup() {
                 )}
                 <p
                   className="ml-auto w-fit cursor-pointer text-sm text-[#0A814A]"
-                  onClick={() => setLoginType("phone number")}
+                  onClick={() => handleSelectLoginType("phone number")}
                 >
                   Use phone number
                 </p>
