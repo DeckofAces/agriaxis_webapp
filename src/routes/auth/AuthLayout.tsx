@@ -10,7 +10,9 @@ function AuthLayout() {
         height={49}
         className="absolute top-20 left-20"
       />
-      <Outlet />
+      <div className="z-5">
+        <Outlet />
+      </div>
     </main>
   );
 }
