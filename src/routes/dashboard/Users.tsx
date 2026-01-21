@@ -24,7 +24,7 @@ function Users() {
     {
       id: "name",
       header: "User name",
-      accessorFn: (row) => `${row.first_name} ${row.last_name}`,
+      accessorFn: (row) => `${row.name}`,
     },
     {
       accessorKey: "email",

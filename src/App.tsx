@@ -1,5 +1,6 @@
 import { Outlet, HeadContent } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { Toaster } from "sonner";
 
 function DesktopOnlyOverlay() {
   return (
@@ -14,6 +15,7 @@ function DesktopOnlyOverlay() {
           Please use an authorized tablet or computer to access the application.
         </p>
       </div>
+      <Toaster />
     </div>
   );
 }

@@ -2,10 +2,16 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import Sidebar from "@/components/dashboard/Sidebar";
 import { useSidebar, SidebarProvider } from "@/contexts/SidebarContext";
 import { useEffect } from "react";
-import { createRoute, Outlet, type AnyRoute } from "@tanstack/react-router";
+import { createRoute, Outlet, redirect, type AnyRoute } from "@tanstack/react-router";
+import { userToken } from "@/lib/utils";
+import { useIsFetching, useIsMutating } from "@tanstack/react-query";
+import { SquaresExclude } from "lucide-react";
 
 function DashboardLayoutContent() {
   const { isOpen, close } = useSidebar();
+  const isFetching = useIsFetching();
+  const isMutating = useIsMutating();
+  const isGlobalLoading = isFetching > 0 || isMutating > 0;
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,6 +43,12 @@ function DashboardLayoutContent() {
           <DashboardHeader />
         </div>
         <div className="flex-1 overflow-y-auto rounded-lg bg-white shadow">
+          {isGlobalLoading && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/90 backdrop-blur-[1px]">
+              <SquaresExclude className="text-primary h-12 w-12 animate-bounce" />
+            </div>
+          )}
+
           <Outlet />
         </div>
       </section>
@@ -57,4 +69,15 @@ export default (parentRoute: AnyRoute) =>
     path: "dashboard",
     component: DashboardLayout,
     getParentRoute: () => parentRoute,
+    beforeLoad: ({ location }) => {
+      if (!userToken()) {
+        throw redirect({
+          to: "/signin",
+          search: {
+            redirect: location.href,
+          },
+          replace: true,
+        });
+      }
+    },
   });

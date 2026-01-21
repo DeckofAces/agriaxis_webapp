@@ -17,6 +17,7 @@ import {
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createRoute, Link, type AnyRoute } from "@tanstack/react-router";
+import { useRegistrationStore } from "@/stores/useRegistrationStore";
 
 const countries = [
   {
@@ -27,18 +28,6 @@ const countries = [
     value: "ghana",
     label: "Ghana",
   },
-  {
-    value: "united-states",
-    label: "United States",
-  },
-  {
-    value: "south-korea",
-    label: "South Korea",
-  },
-  {
-    value: "canada",
-    label: "Canada",
-  },
 ];
 
 function SelectCountryCard() {
@@ -47,9 +36,15 @@ function SelectCountryCard() {
   const selectedCountry = countries.find(
     (country) => country.value === countryValue,
   );
+  const formData = useRegistrationStore((state) => state.updateFormData);
+  const selectCountry = (country: string) => {
+    setCountryValue(country);
+    formData({ country: country });
+  };
+  const isValid = useRegistrationStore.getState().validateStep(["country"]);
 
   return (
-    <div className="flex max-w-5/12 min-w-135 flex-col gap-18.25 rounded-3xl bg-white p-16">
+    <div className="flex max-w-5/12 min-w-135 flex-col gap-7 rounded-3xl bg-white p-16">
       <header className="space-y-2">
         <h5 className="font-neue text-2xl font-semibold text-[#130B30]">
           Your country
@@ -99,9 +94,7 @@ function SelectCountryCard() {
                     key={country.value}
                     value={country.value}
                     onSelect={(currentValue) => {
-                      setCountryValue(
-                        currentValue === countryValue ? "" : currentValue,
-                      );
+                      selectCountry(currentValue);
                       setcountryListOpen(false);
                     }}
                   >
@@ -121,18 +114,26 @@ function SelectCountryCard() {
           </Command>
         </PopoverContent>
       </Popover>
-      <div>
+      <div className="mb-6">
         <Link to="/farm-type" className="block">
-          <Button variant="primary">Continue</Button>
+          <Button variant="primary" disabled={!isValid}>
+            Continue
+          </Button>
         </Link>
       </div>
+      <p className="mx-auto w-fit">
+        Already have an account?{" "}
+        <span className="ml-3 cursor-pointer text-[#0A814A]">
+          <Link to="/signin">Sign in</Link>
+        </span>
+      </p>
     </div>
   );
 }
 
 export default (parentRoute: AnyRoute) =>
   createRoute({
-    path: 'select-country',
+    path: "select-country",
     component: SelectCountryCard,
     getParentRoute: () => parentRoute,
-  })
+  });

@@ -1,3 +1,4 @@
+import { useLogout } from "@/api/auth";
 import { useSidebar } from "@/contexts/SidebarContext";
 import { Link } from "@tanstack/react-router";
 import { LogOut } from "lucide-react";
@@ -6,8 +7,9 @@ import React from "react";
 interface NavItemType {
   label: string;
   icon: React.ReactNode;
-  path: string;
+  path?: string;
   isDisabled?: boolean;
+  onClick?: () => void;
 }
 
 const navItems: NavItemType[] = [
@@ -141,13 +143,19 @@ const navItems: NavItemType[] = [
   },
 ];
 
-const NavItem: React.FC<NavItemType> = ({ label, icon, path, isDisabled }) => {
+const NavItem: React.FC<NavItemType> = ({
+  label,
+  icon,
+  path,
+  isDisabled,
+  onClick,
+}) => {
   const baseClasses =
     "flex items-center space-x-3 p-3 text-sm font-medium transition-colors duration-200 rounded-lg cursor-pointer";
   const disabledClasses = "opacity-70 !cursor-not-allowed";
   const { close } = useSidebar();
 
-  return (
+  return path ? (
     <Link
       to={path}
       className={`${baseClasses} ${isDisabled ? disabledClasses : ""}`}
@@ -164,10 +172,25 @@ const NavItem: React.FC<NavItemType> = ({ label, icon, path, isDisabled }) => {
       <span className="icon-wrapper">{icon}</span>
       <span className="w-32 truncate">{label}</span>
     </Link>
+  ) : (
+    <div
+      onClick={onClick}
+      className="flex cursor-pointer items-center space-x-3 rounded-lg p-3 text-sm font-medium text-white transition-colors duration-200 hover:bg-white/10 [&_.icon-wrapper]:text-white"
+    >
+      <span className="icon-wrapper">{icon}</span>
+      <span className="w-32 truncate">{label}</span>
+    </div>
   );
 };
 
 const Sidebar: React.FC = () => {
+  const { close } = useSidebar();
+  const { mutate: logout } = useLogout();
+
+  const handleLogout = () => {
+    close();
+    logout();
+  };
 
   return (
     <div className="flex h-full w-full flex-col rounded-[1.25rem] bg-[#1E8838] p-4">
@@ -194,7 +217,7 @@ const Sidebar: React.FC = () => {
       </nav>
 
       <div className="mt-8 pt-4">
-        <NavItem label="Log Out" icon={<LogOut />} path="#logout" />
+        <NavItem label="Log Out" icon={<LogOut />} onClick={handleLogout} />
       </div>
     </div>
   );

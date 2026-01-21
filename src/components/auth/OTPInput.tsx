@@ -1,18 +1,26 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 
 interface OtpInputProps {
   length?: number;
   onComplete?: (otp: string) => void;
+  onChange?: (otp: string) => void;
 }
 
-const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onComplete }) => {
-  const [otp, setOtp] = useState<string[]>(new Array(length).fill(''));
+const OtpInput: React.FC<OtpInputProps> = ({
+  length = 6,
+  onComplete,
+  onChange,
+}) => {
+  const [otp, setOtp] = useState<string[]>(new Array(length).fill(""));
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   /**
    * @description Handles single digit change and auto-advances focus.
    */
-  const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const value = e.target.value;
 
     // Ensure only one digit is processed
@@ -30,7 +38,9 @@ const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onComplete }) => {
     newOtp[index] = value;
     setOtp(newOtp);
 
-    const newOtpString = newOtp.join('');
+    const newOtpString = newOtp.join("");
+
+    if (onChange) onChange(newOtpString);
 
     // Auto-advance focus
     if (value && index < length - 1) {
@@ -46,13 +56,16 @@ const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onComplete }) => {
   /**
    * @description Handles backspace/delete key presses for focus management.
    */
-  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace') {
+  const handleKeyDown = (
+    index: number,
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (e.key === "Backspace") {
       const newOtp = [...otp];
 
       if (newOtp[index]) {
         // If current box has a value, clear it
-        newOtp[index] = '';
+        newOtp[index] = "";
         setOtp(newOtp);
       } else if (index > 0) {
         // If current box is empty, move focus to previous box
@@ -67,12 +80,20 @@ const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onComplete }) => {
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     // Remove non-digits and limit to the expected length
-    const pasteData = e.clipboardData.getData('text/plain').replace(/\D/g, '').slice(0, length);
+    const pasteData = e.clipboardData
+      .getData("text/plain")
+      .replace(/\D/g, "")
+      .slice(0, length);
 
     if (pasteData.length > 0) {
-      const newOtp = pasteData.split('');
+      const newOtp = pasteData.split("");
+      const filledOtp = newOtp.concat(
+        new Array(length - newOtp.length).fill(""),
+      );
       // Fill the rest of the array with empty strings if pasted data is shorter than length
-      setOtp(newOtp.concat(new Array(length - newOtp.length).fill('')));
+      setOtp(filledOtp);
+      const combinedValue = filledOtp.join("").trim();
+      if (onChange) onChange(combinedValue);
 
       // Focus the last filled or the next input field
       const nextFocusIndex = Math.min(pasteData.length, length - 1);
@@ -92,14 +113,16 @@ const OtpInput: React.FC<OtpInputProps> = ({ length = 6, onComplete }) => {
           type="tel"
           maxLength={1}
           value={digit}
-          ref={(el) => { inputRefs.current[index] = el; }}
+          ref={(el) => {
+            inputRefs.current[index] = el;
+          }}
           onChange={(e) => handleChange(index, e)}
           onKeyDown={(e) => handleKeyDown(index, e)}
           onPaste={handlePaste}
-          className="size-12 text-center text-lg font-mono rounded-lg bg-[#F3F6F8] text-[#130B30] outline-none border-2 border-transparent focus:border-[#0A814A] transition-all duration-200"
+          className="size-12 rounded-lg border-2 border-transparent bg-[#F3F6F8] text-center font-mono text-lg text-[#130B30] transition-all duration-200 outline-none focus:border-[#0A814A]"
           style={{
-            boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
-            caretColor: '#0A814A'
+            boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+            caretColor: "#0A814A",
           }}
         />
       ))}
