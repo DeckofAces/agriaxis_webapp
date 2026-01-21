@@ -41,10 +41,10 @@ function SelectCountryCard() {
     setCountryValue(country);
     formData({ country: country });
   };
-  const isValid = useRegistrationStore.getState().validateStep(['country'])
+  const isValid = useRegistrationStore.getState().validateStep(["country"]);
 
   return (
-    <div className="flex max-w-5/12 min-w-135 flex-col gap-18.25 rounded-3xl bg-white p-16">
+    <div className="flex max-w-5/12 min-w-135 flex-col gap-7 rounded-3xl bg-white p-16">
       <header className="space-y-2">
         <h5 className="font-neue text-2xl font-semibold text-[#130B30]">
           Your country
@@ -114,11 +114,19 @@ function SelectCountryCard() {
           </Command>
         </PopoverContent>
       </Popover>
-      <div>
+      <div className="mb-6">
         <Link to="/farm-type" className="block">
-          <Button variant="primary" disabled={!isValid}>Continue</Button>
+          <Button variant="primary" disabled={!isValid}>
+            Continue
+          </Button>
         </Link>
       </div>
+      <p className="mx-auto w-fit">
+        Already have an account?{" "}
+        <span className="ml-3 cursor-pointer text-[#0A814A]">
+          <Link to="/signin">Sign in</Link>
+        </span>
+      </p>
     </div>
   );
 }

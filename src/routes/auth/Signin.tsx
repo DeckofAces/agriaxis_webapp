@@ -235,7 +235,9 @@ function Signin() {
         </section>
         <p className="mx-auto w-fit">
           Don't have an account?{" "}
-          <span className="ml-3 cursor-pointer text-[#0A814A]">Sign up</span>
+          <span className="ml-3 cursor-pointer text-[#0A814A]">
+            <Link to="/signup">Sign up</Link>
+          </span>
         </p>
       </section>
     </div>

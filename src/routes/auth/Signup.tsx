@@ -271,12 +271,14 @@ function Signup() {
                 {emailError && (
                   <p className="mt-1 text-sm text-red-600">{emailError}</p>
                 )}
-                <p
-                  className="ml-auto w-fit cursor-pointer text-sm text-[#0A814A]"
-                  onClick={() => handleSelectLoginType("phone number")}
-                >
-                  Use phone number
-                </p>
+                {/** 
+                   <p
+                   className="ml-auto w-fit cursor-pointer text-sm text-[#0A814A]"
+                   onClick={() => handleSelectLoginType("phone number")}
+                   >
+                   Use phone number
+                   </p>
+                  */}
               </div>
             )}
           </>
@@ -290,12 +292,6 @@ function Signup() {
           Sign up
         </Button>
       </form>
-      <p className="mx-auto w-fit">
-        Already have an account?{" "}
-        <Link to="/signin">
-          <span className="ml-3 cursor-pointer text-[#0A814A]">Sign in</span>
-        </Link>
-      </p>
     </div>
   );
 }

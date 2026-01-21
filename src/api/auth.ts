@@ -70,3 +70,16 @@ export const useForgotPassword = () => {
     },
   });
 };
+
+export const useVerifyOtpMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: {otp: string, email: string}) => {
+      const response = await apiClient.post("/verify-otp", data);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+}

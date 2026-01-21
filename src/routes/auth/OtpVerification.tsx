@@ -1,16 +1,27 @@
+import { useVerifyOtpMutation } from "@/api/auth";
 import CountdownTimer from "@/components/auth/CountdownTimer";
 import OtpInput from "@/components/auth/OTPInput";
 import { Button } from "@/components/Button";
 import { useRegistrationStore } from "@/stores/useRegistrationStore";
-import { createRoute, Link, type AnyRoute } from "@tanstack/react-router";
+import {
+  createRoute,
+  redirect,
+  useNavigate,
+  type AnyRoute,
+} from "@tanstack/react-router";
+import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 type LoginType = "phone number" | "email";
 
 function OtpVerification() {
+  const navigate = useNavigate();
   const [loginType, setLoginType] = useState<LoginType>("phone number");
   const formData = useRegistrationStore((state) => state.formData);
   const [otpTarget, setOtpTarget] = useState<string>("");
+  const [otpValue, setOtpValue] = useState("");
+  const { mutate: verify, isPending } = useVerifyOtpMutation();
 
   useEffect(() => {
     if (formData.phone) {
@@ -21,6 +32,23 @@ function OtpVerification() {
       setOtpTarget(formData.email);
     }
   }, []);
+
+  const handleOtpChange = (value: string) => {
+    setOtpValue(value);
+  };
+
+  const handleOtpComplete = (finalOtp: string) => {
+    setOtpValue(finalOtp);
+    verify(
+      { otp: finalOtp, email: formData.email },
+      {
+        onSuccess: () => {
+          toast.success("OTP verified successfully!");
+          navigate({ to: "/dashboard" , replace: true });
+        },
+      },
+    );
+  };
 
   return (
     <div className="flex max-w-5/12 min-w-135 flex-col gap-10 rounded-3xl bg-white p-16">
@@ -36,15 +64,23 @@ function OtpVerification() {
       </header>
       <section className="text-center">
         <div className="mx-auto mb-12 w-fit">
-          <OtpInput />
+          <OtpInput
+            length={6}
+            onChange={handleOtpChange}
+            onComplete={handleOtpComplete}
+          />
         </div>
         <p className="text-sm text-[#434449]">
           Enter code in: <CountdownTimer />
         </p>
       </section>
-      <Link to="/create-password" className="block">
-        <Button variant="primary">Continue</Button>
-      </Link>
+      <Button variant="primary" disabled={otpValue.length < 6 || isPending}>
+        {isPending ? (
+          <LoaderCircle className="mx-auto animate-spin" />
+        ) : (
+          <span>Continue</span>
+        )}
+      </Button>
     </div>
   );
 }
@@ -54,4 +90,13 @@ export default (parentRoute: AnyRoute) =>
     path: "otp-verification",
     component: OtpVerification,
     getParentRoute: () => parentRoute,
+    beforeLoad: () => {
+      const isValid = useRegistrationStore.getState().validateStep(["email"]);
+      if (!isValid) {
+        throw redirect({
+          to: "/signup",
+          replace: true,
+        });
+      }
+    },
   });
