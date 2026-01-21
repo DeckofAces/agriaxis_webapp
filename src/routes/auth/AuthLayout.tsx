@@ -5,8 +5,14 @@ import {
   type AnyRoute,
 } from "@tanstack/react-router";
 import fullLogo from "/assets/icons/full-logo.svg";
+import { useEffect } from "react";
+import { userToken } from "@/lib/utils";
 
 function AuthLayout() {
+  useEffect(() => {
+    if (userToken()) window.location.href = "/dashboard";
+  }, []);
+
   return (
     <main className="relative grid h-screen w-screen place-items-center bg-[#E7F2ED]">
       <Link to="/">
