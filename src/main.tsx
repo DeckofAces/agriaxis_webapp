@@ -23,7 +23,6 @@ import ForgotPasswordRoute from "./routes/auth/ForgotPassword.tsx";
 import OtpVerificationRoute from "./routes/auth/OtpVerification.tsx";
 import ResetPasswordRoute from "./routes/auth/ResetPassword.tsx";
 import SignupRoute from "./routes/auth/Signup.tsx";
-import OrganisationRoute from "./routes/auth/Organisation.tsx";
 import DashboardLayoutRoute from "./routes/dashboard/DashboardLayout.tsx";
 import DashboardIndexRoute from "./routes/dashboard/DashboardIndex.tsx";
 import SoilTestingRoute from "./routes/dashboard/SoilTesting.tsx";
@@ -87,7 +86,6 @@ const routeTree = rootRoute.addChildren([
     OtpVerificationRoute(authRoute),
     ResetPasswordRoute(authRoute),
     SignupRoute(authRoute),
-    OrganisationRoute(authRoute),
   ]),
   dashboardLayoutRoute.addChildren([
     dashboardHomeRoute,

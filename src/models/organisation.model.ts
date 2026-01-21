@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const OrganisationSchema = z.object({
+  id: z.number().optional(),
   organisation_name: z
     .string()
     .min(2, "Organisation name must be at least 2 characters"),

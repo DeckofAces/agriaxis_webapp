@@ -2,9 +2,31 @@ import { createRoute, type AnyRoute } from "@tanstack/react-router";
 import { useMe } from "@/api/auth";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components";
+import { useEffect, useState } from "react";
+import { OrganisationModal } from "@/components/dashboard/OrganisationModal";
+import { useOrganisationStore } from "@/stores/useOrganisationStore";
 
 function Profile() {
   const { data: user } = useMe();
+  const [showOrganisationModal, setShowOrganisationModal] = useState(false);
+  const organisationFormData = useOrganisationStore(
+    (state) => state.updateFormData,
+  );
+
+  useEffect(() => {
+    if (user?.organisations) {
+      organisationFormData({
+        organisation_name: user?.organisations[0].name,
+        organisation_type: user?.organisations[0].type,
+        registration_number: user?.organisations[0].registration_number,
+        number_of_farms_to_be_monitored:
+          user?.organisations[0].expected_farms_count ?? 0,
+        state: user?.organisations[0].address.state,
+        local_government_area: user?.organisations[0].address.lga,
+        address: user?.organisations[0].address.physical_address,
+      });
+    }
+  }, [user]);
 
   return (
     <>
@@ -56,7 +78,10 @@ function Profile() {
                 Organisation
               </h6>
               <div className="w-fit">
-                <Button variant="link">
+                <Button
+                  variant="link"
+                  onClick={() => setShowOrganisationModal(true)}
+                >
                   {user?.organisations ? "Edit" : "Add"}
                 </Button>
               </div>
@@ -131,6 +156,12 @@ function Profile() {
           )}
         </section>
       </section>
+      {showOrganisationModal && (
+        <OrganisationModal
+          onClose={() => setShowOrganisationModal(false)}
+          requestType={user?.organisations ? "edit" : "add"}
+        />
+      )}
     </>
   );
 }

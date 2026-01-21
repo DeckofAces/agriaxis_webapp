@@ -1,6 +1,6 @@
 import type { OrganisationFormData } from "@/models/organisation.model";
 import apiClient from "./api-client";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useGetOrganisationQuery = () => {
   return useQuery({
@@ -17,6 +17,25 @@ export const useCreateOrganisationMutation = () => {
     mutationFn: async (data: OrganisationFormData) => {
       const response = await apiClient.post("/setup-organisation", data);
       return response.data;
+    },
+  });
+};
+
+export const useEditOrganisationMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      id,
+      data,
+    }: {
+      id: number;
+      data: OrganisationFormData;
+    }) => {
+      const response = await apiClient.put(`/organisations/${id}`, data);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["organisation"] });
     },
   });
 };
