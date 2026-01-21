@@ -2,10 +2,18 @@ import OrganisationAddressForm from "@/components/auth/OrganisationAddressForm";
 import OrganisationProfileForm from "@/components/auth/OrganisationProfileForm";
 import { Button } from "@/components/Button";
 import { createRoute, type AnyRoute } from "@tanstack/react-router";
-
-const step: "profile" | "address" = "address";
+import { useState } from "react";
 
 function Organisation() {
+  const [step, setStep] = useState<"profile" | "address">("profile");
+  const handleContinue = () => {
+    if (step === "profile") {
+      setStep("address");
+    } else {
+      setStep("profile");
+    }
+  };
+
   return (
     <div className="flex max-w-5/12 min-w-135 flex-col gap-10 rounded-3xl bg-white p-16">
       <header className="space-y-2">
@@ -20,7 +28,7 @@ function Organisation() {
         {step === "profile" && <OrganisationProfileForm />}
         {step === "address" && <OrganisationAddressForm />}
       </section>
-      <Button variant="primary">Continue</Button>
+      <Button variant="primary" onClick={handleContinue}>Continue</Button>
     </div>
   );
 }
