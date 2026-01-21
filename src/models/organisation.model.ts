@@ -24,3 +24,31 @@ export interface OrganisationState {
   validateStep: (fields: (keyof OrganisationFormData)[]) => boolean;
   resetForm: () => void;
 }
+
+export interface Organisation {
+  id: number;
+  name: string;
+  slug: string;
+  description: null | string;
+  type: string;
+  type_label: string;
+  registration_number: string;
+  contact_person: {
+    name: string;
+    email: string;
+    phone: null | string;
+  };
+  address: {
+    state: string;
+    lga: string;
+    physical_address: string;
+  };
+  expected_farmers_count: null | number;
+  expected_farms_count: null | number;
+  email_verified: boolean;
+  email_verified_at: null | string;
+  created_at: string;
+  updated_at: string;
+  role: null;
+  joined_at: string;
+}

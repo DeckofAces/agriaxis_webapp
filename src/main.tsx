@@ -32,6 +32,7 @@ import CropMonitoringRoute from "./routes/dashboard/CropMonitoring.tsx";
 import CreatePasswordRoute from "./routes/auth/CreatePassword.tsx";
 import RolesRoute from "./routes/dashboard/Roles.tsx";
 import UsersRoute from "./routes/dashboard/Users.tsx";
+import ProfileRoute from "./routes/dashboard/Profile.tsx";
 
 const rootRoute = createRootRoute({
   head: () => ({
@@ -96,6 +97,7 @@ const routeTree = rootRoute.addChildren([
     CropMonitoringRoute(dashboardLayoutRoute),
     RolesRoute(dashboardLayoutRoute),
     UsersRoute(dashboardLayoutRoute),
+    ProfileRoute(dashboardLayoutRoute),
   ]),
 ]);
 

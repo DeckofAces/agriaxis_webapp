@@ -4,7 +4,7 @@ import { useState } from "react";
 import NotificationPermissionModal from "@/components/dashboard/NotificationPermissionModal";
 import LocationPermissionModal from "@/components/dashboard/LocationPermissionModal";
 import { useSidebar } from "@/contexts/SidebarContext";
-import { useMatches } from "@tanstack/react-router";
+import { Link, useMatches } from "@tanstack/react-router";
 import { useMe } from "@/api/auth";
 
 interface IconButtonProps {
@@ -26,9 +26,11 @@ const ProfileButton: React.FC = () => {
 
   return (
     <button className="flex items-center space-x-2 rounded-full border border-gray-200 bg-white p-1 pr-3 pl-1 transition duration-150 ease-in-out hover:shadow-md">
-      <div className="uppercase relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-green-500 bg-green-100 text-sm font-semibold text-green-700">
-        {user?.name.slice(0, 2)}
-      </div>
+      <Link to="/dashboard/profile">
+        <div className="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-green-500 bg-green-100 text-sm font-semibold text-green-700 uppercase">
+          {user?.name.slice(0, 2)}
+        </div>
+      </Link>
       <ChevronsRight className="h-5 w-5 text-gray-500" />
     </button>
   );
@@ -84,7 +86,7 @@ const DashboardHeader: React.FC = () => {
       <div className="flex items-center space-x-4">
         <h1 className="font-neue text-3xl font-bold text-[#0F172A] lg:text-2xl">
           {matches.map((match: any) => {
-            return <div key={match.id}>{match.staticData.title}</div>;
+            return <span key={match.id}>{match.staticData.title}</span>;
           })}
         </h1>
       </div>
