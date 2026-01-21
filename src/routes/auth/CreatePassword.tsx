@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-router";
 import { Eye, EyeOff, LoaderCircle, Check } from "lucide-react"; 
 import { useState, useMemo } from "react";
-import { useRegisterUser } from "@/api/auth/register";
+import { useRegisterUser } from "@/api/auth";
 
 interface PasswordFormData {
   password: string;

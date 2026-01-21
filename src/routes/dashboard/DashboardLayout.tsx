@@ -3,9 +3,14 @@ import Sidebar from "@/components/dashboard/Sidebar";
 import { useSidebar, SidebarProvider } from "@/contexts/SidebarContext";
 import { useEffect } from "react";
 import { createRoute, Outlet, type AnyRoute } from "@tanstack/react-router";
+import { userToken } from "@/lib/utils";
 
 function DashboardLayoutContent() {
   const { isOpen, close } = useSidebar();
+
+  useEffect(() => {
+    if (!userToken()) window.location.href = "/signin";
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {

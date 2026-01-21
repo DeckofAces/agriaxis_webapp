@@ -2,8 +2,6 @@ import { Button } from "@/components/Button";
 import { allCountries, type Country } from "@/data/countries";
 import { Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import facebookIcon from "/assets/icons/facebook.svg";
-import googleIcon from "/assets/icons/google.svg";
 import {
   createRoute,
   Link,
@@ -60,7 +58,8 @@ function Signup() {
       );
     });
   }, [searchTerm]);
-  const [signupFormData, setSignupFormData] = useState<SignupFormData>(initialFormData);
+  const [signupFormData, setSignupFormData] =
+    useState<SignupFormData>(initialFormData);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setSignupFormData((prev) => ({
@@ -84,10 +83,10 @@ function Signup() {
 
   const handleSelectLoginType = (loginType: LoginType) => {
     setLoginType(loginType);
-    if (loginType === 'phone number') {
-      updateFormData({ phone: '' })
+    if (loginType === "phone number") {
+      updateFormData({ phone: "" });
     } else {
-      updateFormData({ email: '' })
+      updateFormData({ email: "" });
     }
   };
 
@@ -291,15 +290,6 @@ function Signup() {
           Sign up
         </Button>
       </form>
-      <div>
-        <div className="mx-auto mt-6 w-fit text-center">
-          <p className="mb-4 text-sm text-[#434449]">Or continue with</p>
-          <div className="mx-auto flex w-fit items-center gap-6">
-            <img src={facebookIcon} width={32} height={32} />
-            <img src={googleIcon} width={32} height={32} />
-          </div>
-        </div>
-      </div>
       <p className="mx-auto w-fit">
         Already have an account?{" "}
         <Link to="/signin">
@@ -316,12 +306,17 @@ export default (parentRoute: AnyRoute) =>
     component: Signup,
     getParentRoute: () => parentRoute,
     beforeLoad: () => {
-      const isValid = useRegistrationStore.getState().validateStep(['farm_type'])
+      const isValid = useRegistrationStore
+        .getState()
+        .validateStep(["farm_type"]);
       if (!isValid) {
         throw redirect({
           to: "/farm-type",
           replace: true,
-        })
+        });
       }
-    }
+    },
   });
+
+// TODO: Update error handling, to return popop error messages
+// TODO: Update form validation

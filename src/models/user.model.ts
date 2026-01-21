@@ -1,10 +1,14 @@
 export interface User {
   id: string;
-  first_name: string;
-  last_name: string;
+  name: string;
+  organisations: any[];
+  created_at: string;
+  updated_at: string;
+  email_verified_at: string;
   email: string;
   phone: string;
   role: string;
   status: string;
   date_created: string;
 }
+
