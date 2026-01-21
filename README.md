@@ -1,5 +1,5 @@
 Welcome to your new TanStack app! 
-agriaxis web
+agriaxis webapp
 
 # Getting Started
 
