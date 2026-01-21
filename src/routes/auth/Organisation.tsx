@@ -1,16 +1,51 @@
 import OrganisationAddressForm from "@/components/auth/OrganisationAddressForm";
+import { LoaderCircle } from "lucide-react";
 import OrganisationProfileForm from "@/components/auth/OrganisationProfileForm";
 import { Button } from "@/components/Button";
 import { createRoute, type AnyRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { useOrganisationStore } from "@/stores/useOrganisationStore";
+import { useCreateOrganisationMutation } from "@/api/organisation";
+import { toast } from "sonner";
 
 function Organisation() {
   const [step, setStep] = useState<"profile" | "address">("profile");
-  const handleContinue = () => {
+  const { formData, validateStep } = useOrganisationStore();
+  const createOrganisation = useCreateOrganisationMutation();
+
+  const handleContinue = async () => {
     if (step === "profile") {
-      setStep("address");
+      const isValid = validateStep([
+        "organisation_name",
+        "organisation_type",
+        "registration_number",
+        "number_of_farms_to_be_monitored",
+      ]);
+
+      if (isValid) {
+        setStep("address");
+      } else {
+        toast.error("Please fill in all required fields correctly");
+      }
     } else {
-      setStep("profile");
+      const isValid = validateStep([
+        "state",
+        "city",
+        "local_government_area",
+        "address",
+      ]);
+
+      if (isValid) {
+        try {
+          await createOrganisation.mutateAsync(formData);
+          toast.success("Organisation created successfully!");
+        } catch (error) {
+          toast.error("Failed to create organisation. Please try again.");
+          console.error(error);
+        }
+      } else {
+        toast.error("Please fill in all required fields correctly");
+      }
     }
   };
 
@@ -28,7 +63,31 @@ function Organisation() {
         {step === "profile" && <OrganisationProfileForm />}
         {step === "address" && <OrganisationAddressForm />}
       </section>
-      <Button variant="primary" onClick={handleContinue}>Continue</Button>
+      <div className="flex gap-4">
+        {step === "address" && (
+          <Button
+            variant="tertiary"
+            onClick={() => setStep("profile")}
+            disabled={createOrganisation.isPending}
+          >
+            Back
+          </Button>
+        )}
+        <Button
+          variant="primary"
+          onClick={handleContinue}
+          disabled={createOrganisation.isPending}
+          className="flex-1"
+        >
+          {createOrganisation.isPending ? (
+            <LoaderCircle className="mx-auto animate-spin" />
+          ) : step === "profile" ? (
+            "Continue"
+          ) : (
+            "Submit"
+          )}
+        </Button>
+      </div>
     </div>
   );
 }
