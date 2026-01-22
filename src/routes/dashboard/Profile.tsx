@@ -40,13 +40,13 @@ function Profile() {
           <div>
             <h6 className="text-sm text-[#626267]">Name</h6>
             <p className="font-neue text-xl font-bold text-[#130B30]">
-              {user?.name}
+              {user?.name ?? "N/A"}
             </p>
           </div>
           <div>
             <h6 className="text-sm text-[#626267]">Email</h6>
             <p className="font-neue text-xl font-bold text-[#130B30]">
-              {user?.email}
+              {user?.email ?? "N/A"}
             </p>
           </div>
           <div>
