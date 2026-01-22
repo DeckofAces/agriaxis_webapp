@@ -31,13 +31,10 @@ export default (parentRoute: AnyRoute) =>
     id: "auth",
     component: AuthLayout,
     getParentRoute: () => parentRoute,
-    beforeLoad: ({ location }) => {
+    beforeLoad: () => {
       if (userToken()) {
         throw redirect({
           to: "/dashboard",
-          search: {
-            redirect: location.href,
-          },
           replace: true,
         });
       }

@@ -69,13 +69,10 @@ export default (parentRoute: AnyRoute) =>
     path: "dashboard",
     component: DashboardLayout,
     getParentRoute: () => parentRoute,
-    beforeLoad: ({ location }) => {
+    beforeLoad: () => {
       if (!userToken()) {
         throw redirect({
           to: "/signin",
-          search: {
-            redirect: location.href,
-          },
           replace: true,
         });
       }

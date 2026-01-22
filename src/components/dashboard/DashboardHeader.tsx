@@ -21,12 +21,12 @@ const IconButton: React.FC<IconButtonProps> = ({ children, badge = false }) => (
   </button>
 );
 
-const ProfileButton: React.FC = () => {
+const ProfileButton: React.FC<{ profilePath: string }> = ({ profilePath }) => {
   const { data: user } = useMe();
 
   return (
     <button className="flex items-center space-x-2 rounded-full border border-gray-200 bg-white p-1 pr-3 pl-1 transition duration-150 ease-in-out hover:shadow-md">
-      <Link to="/dashboard/profile">
+      <Link to={profilePath}>
         <div className="relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-green-500 bg-green-100 text-sm font-semibold text-green-700 uppercase">
           {user?.name.slice(0, 2)}
         </div>
@@ -100,7 +100,7 @@ const DashboardHeader: React.FC = () => {
           <Bell className="h-5 w-5" />
         </IconButton>
 
-        <ProfileButton />
+        <ProfileButton profilePath="/dashboard/profile" />
       </div>
 
       <NotificationPermissionModal

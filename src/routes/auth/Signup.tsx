@@ -4,7 +4,6 @@ import { Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   createRoute,
-  Link,
   redirect,
   useNavigate,
   type AnyRoute,
